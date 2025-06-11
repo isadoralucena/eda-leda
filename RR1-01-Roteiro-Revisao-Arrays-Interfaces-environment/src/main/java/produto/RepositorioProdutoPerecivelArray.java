@@ -106,7 +106,7 @@ public class RepositorioProdutoPerecivelArray {
 	 * @throws RuntimeException
 	 */
 	public void remover(int codigo) {
-		int indice = procurarIndice(produto.getCodigo());
+		int indice = procurarIndice(codigo);
 		if (indice == -1) {
 			throw new RuntimeException("Produto não encontrado para remoção");
 		}
@@ -124,7 +124,7 @@ public class RepositorioProdutoPerecivelArray {
 	 * @throws RuntimeException
 	 */
 	public ProdutoPerecivel procurar(int codigo) {
-		int indice = procurarIndice(produto.getCodigo());
+		int indice = procurarIndice(codigo);
 		if (indice == -1) {
 			throw new RuntimeException("Produto não encontrado para remoção");
 		}

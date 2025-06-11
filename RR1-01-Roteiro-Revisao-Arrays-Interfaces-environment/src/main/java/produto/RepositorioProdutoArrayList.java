@@ -17,7 +17,7 @@ public class RepositorioProdutoArrayList {
 	 * A estrutura onde os produtos sao mantidos. Voce nao precisa se preocupar
 	 * por enquanto com o uso de generics em ArrayList.
 	 */
-	private ArrayList produtos;
+	private ArrayList<Produto> produtos;
 
 	/**
 	 * A posicao do ultimo elemento inserido no array de produtos. o valor
@@ -27,7 +27,7 @@ public class RepositorioProdutoArrayList {
 
 	public RepositorioProdutoArrayList(int size) {
 		super();
-		this.produtos = new ArrayList();
+		this.produtos = new ArrayList<Produto>();
 	}
 
 	/**
@@ -41,8 +41,8 @@ public class RepositorioProdutoArrayList {
 	 */
 	private int procurarIndice(int codigo) {
 		int indice = -1;
-		for (int i = 0; i <= produtos.length(); i++) {
-			if (produtos.get(indice).getCodigo() == codigo) {
+		for (int i = 0; i < produtos.size(); i++) {
+			if (produtos.get(i).getCodigo() == codigo) {
 				indice = i;
 				break;
 			}
@@ -99,7 +99,7 @@ public class RepositorioProdutoArrayList {
 	 * @throws RuntimeException
 	 */
 	public void remover(int codigo) {
-		int indice = procurarIndice(produto.getCodigo());
+		int indice = procurarIndice(codigo);
 		if (indice == -1) {
 			throw new RuntimeException("Produto não encontrado para remoção");
 		}
@@ -115,7 +115,7 @@ public class RepositorioProdutoArrayList {
 	 * @return Produto
 	 */
 	public Produto procurar(int codigo) {
-		int indice = procurarIndice(produto.getCodigo());
+		int indice = procurarIndice(codigo);
 		if (indice == -1) {
 			throw new RuntimeException("Produto não encontrado para remoção");
 		}

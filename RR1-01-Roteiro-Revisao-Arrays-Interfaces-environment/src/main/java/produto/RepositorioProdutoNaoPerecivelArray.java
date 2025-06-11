@@ -105,13 +105,14 @@ public class RepositorioProdutoNaoPerecivelArray {
 	 * @throws RuntimeException
 	 */
 	public void remover(int codigo) {
-		int indice = procurarIndice(produto.getCodigo());
+		int indice = procurarIndice(codigo);
 		if (indice == -1) {
 			throw new RuntimeException("Produto não encontrado para remoção");
 		}
 		for (int i = indice; i < index; i++) {
 			produtos[i] = produtos[i + 1];
 		}
+		index--;
 	}
 
 	/**
@@ -122,7 +123,7 @@ public class RepositorioProdutoNaoPerecivelArray {
 	 * @return ProdutoNaoPerecivel
 	 */
 	public ProdutoNaoPerecivel procurar(int codigo) {
-		int indice = procurarIndice(produto.getCodigo());
+		int indice = procurarIndice(codigo);
 		if (indice == -1) {
 			throw new RuntimeException("Produto não encontrado para remoção");
 		}
