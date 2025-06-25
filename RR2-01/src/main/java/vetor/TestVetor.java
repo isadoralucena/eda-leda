@@ -1,6 +1,6 @@
 package vetor;
 
-public class TestarVetor {
+public class TestVetor {
 
 	public static void main(String[] args) {
 		// preencha esse metodo com codigo para testar a classe vetor.

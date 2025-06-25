@@ -117,7 +117,7 @@ public class Vetor <T extends Comparable<T>> {
 		if (!isVazio()) {
 			result = arrayInterno[0];
 			for (int i = 0; i <= indice; i++) {
-				if (comparadorMinimo.compare(result, arrayInterno[i]) < 0) {
+				if (comparadorMinimo.compare(result, arrayInterno[i]) > 0) {
 					result = arrayInterno[i];
 				}
 			}

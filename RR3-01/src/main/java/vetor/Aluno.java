@@ -1,5 +1,7 @@
 package vetor;
 
+import java.util.Objects;
+
 public class Aluno implements Comparable<Aluno> {
 	private String nome;
 	private double media;
@@ -28,16 +30,19 @@ public class Aluno implements Comparable<Aluno> {
 
 	@Override
 	public int compareTo(Aluno o) {
-		return (int) (this.media - o.media);
+		return Double.compare(this.media, o.media);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(nome, media);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		boolean result = false;
-		if (obj instanceof Aluno) {
-			result = (this.compareTo((Aluno) obj) == 0);
-		}
-		return result;
+		Aluno other = (obj instanceof Aluno) ? (Aluno) obj : null;
+    	return other != null &&
+           Double.compare(this.media, other.media) == 0 &&
+           this.nome.equals(other.nome);
 	}
-
 }
