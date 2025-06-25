@@ -40,4 +40,9 @@ public class Util {
 		}
 		return result;
 	}
+
+	public static void validateLimits(Object[] array, int leftIndex, int rightIndex) {
+		if (array == null) throw new IllegalArgumentException();
+		if (leftIndex < 0 || rightIndex > array.length) throw new IndexOutOfBoundsException();
+	}
 }
