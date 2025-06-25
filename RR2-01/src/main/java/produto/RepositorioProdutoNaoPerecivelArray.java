@@ -20,14 +20,14 @@ public class RepositorioProdutoNaoPerecivelArray extends RepositorioProdutosArra
 	}
 
 	@Override
-	public void inserir(Produto produto) {
+	public void inserir(ProdutoNaoPerecivel produto) {
 		if (produto instanceof ProdutoNaoPerecivel) {
 			super.inserir(produto);
 		}
 	}
 
 	@Override
-	public void atualizar(Produto produto) {
+	public void atualizar(ProdutoNaoPerecivel produto) {
 		if (produto instanceof ProdutoNaoPerecivel) {
 			super.atualizar(produto);
 		}

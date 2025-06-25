@@ -1,9 +1,9 @@
 package produto;
 
-public interface RepositorioProdutos {
+public interface RepositorioProdutos <T extends Produto>{
     public abstract boolean existe(int codigo);
-	public abstract void inserir(Produto produto);
-	public abstract void atualizar(Produto produto);
+	public abstract void inserir(T produto);
+	public abstract void atualizar(T produto);
 	public abstract void remover(int codigo);
-	public abstract Produto procurar(int codigo);
+	public abstract T procurar(int codigo);
 }

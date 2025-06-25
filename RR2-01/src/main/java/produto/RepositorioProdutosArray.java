@@ -4,8 +4,9 @@ public class RepositorioProdutosArray <T extends Produto> implements Repositorio
 	private T[] produtos;
 	private int index = -1;
 
-	public RepositorioProdutoArray(int size) {
-		this.produtos = new T[size];
+	@SuppressWarnings("unchecked")
+	public RepositorioProdutosArray(int size) {
+		this.produtos = (T[]) new Object[size];
 	}
 
 	private int procurarIndice(int codigo) {
@@ -63,8 +64,8 @@ public class RepositorioProdutosArray <T extends Produto> implements Repositorio
 	}
 
 	@Override
-	public Produto procurar(int codigo) {
-		Produto resposta = null;
+	public T procurar(int codigo) {
+		T resposta = null;
 		int i = this.procurarIndice(codigo);
 		if (i != -1) {
 			resposta = produtos[i];

@@ -51,7 +51,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+			<!--
 			<plugin>
 				<groupId>br.edu.ufcg.ccc</groupId>
 				<artifactId>leda-compactor-tool</artifactId>
@@ -63,17 +63,15 @@
 							<goal>compact</goal>
 						</goals>
 						<configuration>
-							<!-- insira sua matricula -->
-							<matricula>INSIRA SEU NUMERO DE MATRICULA</matricula>
-							<!-- insira o ID correto da atividade e a turma -->
-							<roteiro>RRX-0X</roteiro>
-							<!-- NÃO MODIFIQUE AS TAGS ABAIXO -->
+							<matricula>124110308</matricula>
+							<roteiro>RR2-01</roteiro>
 							<semestre>2025.1</semestre>
 							<url>http://150.165.85.97/submitAtividade</url>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+			-->
 		</plugins>
 	</build>
 </project>

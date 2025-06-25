@@ -24,8 +24,10 @@ public class Vetor <T extends Comparable<T>> {
 	private Comparator<T> comparadorMaximo;
 	private Comparator<T> comparadorMinimo;
 
+	@SuppressWarnings("unchecked")
 	public Vetor(int tamanho) {
 		super();
+		this.arrayInterno = (T[]) new Comparable[tamanho];
 		this.tamanho = tamanho;
 		this.indice = -1;
 	}
@@ -40,7 +42,10 @@ public class Vetor <T extends Comparable<T>> {
 
 	// Insere um objeto no vetor
 	public void inserir(T o) {
-		this.arrayInterno[++indice] = o;
+		if (isCheio()) {
+            throw new IllegalStateException("Vetor está cheio.");
+        }
+        arrayInterno[++indice] = o;
 	}
 
 	// Remove um objeto do vetor
@@ -87,6 +92,10 @@ public class Vetor <T extends Comparable<T>> {
 	}
 
 	public T maximo() {
+		if (comparadorMaximo == null) {
+            throw new IllegalStateException("Comparador máximo não foi definido.");
+        }
+
 		T result = null;
 		if (!isVazio()) {
 			result = arrayInterno[0];
@@ -100,6 +109,10 @@ public class Vetor <T extends Comparable<T>> {
 	}
 
 	public T minimo() {
+		if (comparadorMinimo == null) {
+            throw new IllegalStateException("Comparador mínimo não foi definido.");
+        }
+
 		T result = null;
 		if (!isVazio()) {
 			result = arrayInterno[0];

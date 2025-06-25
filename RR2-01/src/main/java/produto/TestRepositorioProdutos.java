@@ -6,11 +6,11 @@ import org.junit.Test;
 
 public class TestRepositorioProdutos {
 	
-	private RepositorioProdutoArrayList repositorio;
+	private RepositorioProdutoArrayList<Produto> repositorio;
 	
 	@Before
 	public void setUp() {
-		this.repositorio = new RepositorioProdutoArrayList(10);
+		this.repositorio = new RepositorioProdutoArrayList<>(10);
 	}
 	
 	@Test

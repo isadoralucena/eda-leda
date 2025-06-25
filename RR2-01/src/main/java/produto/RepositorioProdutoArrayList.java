@@ -21,7 +21,7 @@ public class RepositorioProdutoArrayList <T extends Produto> implements Reposito
 
 	public RepositorioProdutoArrayList(int size) {
 		super();
-		this.produtos = new ArrayList<T>();
+		this.produtos = new ArrayList<T>(size);
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class RepositorioProdutoArrayList <T extends Produto> implements Reposito
 	 * @param codigo
 	 * @return Produto
 	 */
-	public Produto procurar(int codigo) {
+	public T procurar(int codigo) {
 		int indice = procurarIndice(codigo);
 		if (indice == -1) {
 			throw new RuntimeException("Produto não encontrado para remoção");
