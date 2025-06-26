@@ -1,24 +1,43 @@
-# Compiled class file
-*.class
+# Compiled class files
+**/*.class
 
-# Log file
-*.log
+# Log files
+**/*.log
 
 # BlueJ files
-*.ctxt
+**/*.ctxt
 
 # Mobile Tools for Java (J2ME)
-.mtj.tmp/
+**/.mtj.tmp/
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+# VSCode settings (em qualquer pasta)
+**/.vscode/
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# IntelliJ IDEA settings (em qualquer pasta)
+**/.idea/
+**/*.iml
+
+# Maven build directories (em qualquer pasta)
+**/target/
+
+# Eclipse files (em qualquer pasta)
+**/*.classpath
+**/*.project
+**/.settings/
+
+# Package Files
+**/*.jar
+**/*.war
+**/*.nar
+**/*.ear
+**/*.zip
+**/*.tar.gz
+**/*.rar
+
+# JVM crash logs
+**/hs_err_pid*
+**/replay_pid*
+
+# System files
+**/.DS_Store
+**/Thumbs.db
