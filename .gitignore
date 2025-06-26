@@ -10,17 +10,17 @@
 # Mobile Tools for Java (J2ME)
 **/.mtj.tmp/
 
-# VSCode settings (em qualquer pasta)
+# VSCode settings
 **/.vscode/
 
-# IntelliJ IDEA settings (em qualquer pasta)
+# IntelliJ IDEA settings
 **/.idea/
 **/*.iml
 
-# Maven build directories (em qualquer pasta)
+# Maven build directories
 **/target/
 
-# Eclipse files (em qualquer pasta)
+# Eclipse files
 **/*.classpath
 **/*.project
 **/.settings/
