@@ -16,6 +16,12 @@ def fibonacci_iterative(num):
 
     for _ in range(num):
         current, next_value = next_value, current + next_value
+        """
+        Mesmo que:
+            temporary_var = current
+            current = next_value
+            next_value = current + next_value
+        """
 
     return current
 
