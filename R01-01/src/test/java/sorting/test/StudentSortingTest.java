@@ -110,7 +110,9 @@ public class StudentSortingTest {
 			copy1 = Arrays.copyOf(array, array.length);			
 		}
 		implementation.sort(array, leftIndex, rightIndex);
-		Arrays.sort(copy1);
+		if (array.length > 0) {
+			Arrays.sort(copy1, leftIndex, rightIndex + 1);
+		}
 		Assert.assertArrayEquals(copy1, array);
 	}
 
