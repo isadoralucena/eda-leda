@@ -116,5 +116,29 @@ public class StudentSortingTest {
 		Assert.assertArrayEquals(copy1, array);
 	}
 
+	@Test
+	public void testPartialSort01() {
+		genericTest(vetorTamPar, 2, 7);
+	}
 
+	@Test
+	public void testPartialSort02() {
+		genericTest(vetorTamImpar, 3, 9);
+	}
+
+	@Test
+	public void testPartialSort03() {
+		genericTest(vetorValoresRepetidos, 2, 6);
+
+	}
+
+	@Test
+	public void testPartialSort04() {
+		genericTest(vetorValoresIguais, 0, vetorValoresIguais.length - 1);
+	}
+
+	@Test
+	public void testPartialSort05() {
+		genericTest(vetorVazio, 0, 0);
+	}
 }
