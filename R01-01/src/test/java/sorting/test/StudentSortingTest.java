@@ -10,6 +10,9 @@ import sorting.AbstractSorting;
 import sorting.simpleSorting.BubbleSort;
 import sorting.simpleSorting.InsertionSort;
 import sorting.simpleSorting.SelectionSort;
+import sorting.variationsOfBubblesort.BidirectionalBubbleSort;
+import sorting.variationsOfBubblesort.RecursiveBubbleSort;
+import sorting.variationsOfSelectionsort.RecursiveSelectionSort;
 
 public class StudentSortingTest {
 
@@ -39,7 +42,7 @@ public class StudentSortingTest {
 	*/
 	private void getImplementation() {
 		// TO DO: O aluno deve instanciar sua implementação abaixo ao invés de null
-		this.implementation = new SelectionSort<>();
+		this.implementation = new RecursiveSelectionSort<>();
 		// Assert.fail("Implementation not provided");
 	}
 
