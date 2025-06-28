@@ -9,6 +9,7 @@ import org.junit.Test;
 import sorting.AbstractSorting;
 import sorting.simpleSorting.BubbleSort;
 import sorting.simpleSorting.InsertionSort;
+import sorting.simpleSorting.SelectionSort;
 
 public class StudentSortingTest {
 
@@ -38,7 +39,7 @@ public class StudentSortingTest {
 	*/
 	private void getImplementation() {
 		// TO DO: O aluno deve instanciar sua implementação abaixo ao invés de null
-		this.implementation = new InsertionSort<>();
+		this.implementation = new SelectionSort<>();
 		// Assert.fail("Implementation not provided");
 	}
 

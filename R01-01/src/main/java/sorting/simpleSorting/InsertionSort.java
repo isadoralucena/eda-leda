@@ -16,7 +16,7 @@ public class InsertionSort<T extends Comparable<T>> extends AbstractSorting<T> {
 			T valueToInsert = array[i];
 			int insertionIndex = i;
 
-			while (insertionIndex > leftIndex &&  array[insertionIndex - 1].compareTo(valueToInsert) > 0){
+			while (insertionIndex > leftIndex && array[insertionIndex - 1].compareTo(valueToInsert) > 0){
 				array[insertionIndex] = array[insertionIndex - 1];
 				insertionIndex--;
 			}
