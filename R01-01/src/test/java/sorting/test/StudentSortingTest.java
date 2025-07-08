@@ -15,7 +15,7 @@ import sorting.variationsOfBubblesort.RecursiveBubbleSort;
 import sorting.variationsOfSelectionsort.RecursiveSelectionSort;
 
 public class StudentSortingTest {
-
+	
 	private Integer[] vetorTamPar;
 	private Integer[] vetorTamImpar;
 	private Integer[] vetorVazio = {};
@@ -34,16 +34,8 @@ public class StudentSortingTest {
 		getImplementation();
 	}
 
-	// MÉTODOS AUXILIARES DA INICIALIZAÇÃO
-
-	/**
-	 * Método que inicializa a implementação a ser testada com a implementação
-	 * do aluno
-	*/
 	private void getImplementation() {
-		// TO DO: O aluno deve instanciar sua implementação abaixo ao invés de null
-		this.implementation = new RecursiveSelectionSort<>();
-		// Assert.fail("Implementation not provided");
+		this.implementation = new RecursiveBubbleSort<>();
 	}
 
 	public void populaVetorTamanhoPar(Integer[] arrayPadrao) {
@@ -62,13 +54,10 @@ public class StudentSortingTest {
 		this.vetorValoresIguais = Arrays .copyOf(arrayPadrao, arrayPadrao.length);
 	}
 
-	// FIM DOS METODOS AUXILIARES DA INICIALIZAÇÃO
-
-	// MÉTODOS DE TESTE
 	public void genericTest(Integer[] array) {
 		Integer[] copy1 = {};
-		if(array.length > 0){
-			copy1 = Arrays.copyOf(array, array.length);			
+		if(array != null && array.length > 0){
+			copy1 = Arrays.copyOf(array, array.length);
 		}
 		implementation.sort(array);
 		Arrays.sort(copy1);
@@ -100,24 +89,24 @@ public class StudentSortingTest {
 		genericTest(vetorValoresRepetidos);
 	}
 
-	// MÉTODOS QUE OS ALUNOS PODEM CRIAR
-
-	/**
-	 * O ALUNO PODE IMPLEMENTAR METODOS DE ORDENAÇÃO TESTANDO O SORT COM TRES
-	 * ARGUMENTOS PARA TESTAR A ORDENACAO EM UM PEDAÇO DO ARRAY. DICA: PROCUREM
-	 * SEGUIR A ESTRUTURA DOS MÉTODOS DE TESTE ACIMA DESCRITOS, ORDENANDO APENAS
-	 * UMA PARTE DO ARRAY.
-	*/
-
 	public void genericTest(Integer[] array, int leftIndex, int rightIndex) {
 		Integer[] copy1 = {};
-		if(array.length > 0){
-			copy1 = Arrays.copyOf(array, array.length);			
+
+		if (array != null && array.length > 0) {
+			copy1 = Arrays.copyOf(array, array.length);
 		}
-		implementation.sort(array, leftIndex, rightIndex);
-		if (array.length > 0) {
+
+		boolean valid =
+			array != null &&
+			leftIndex >= 0 &&
+			rightIndex < array.length &&
+			leftIndex <= rightIndex;
+
+		if (valid) {
+			implementation.sort(array, leftIndex, rightIndex);
 			Arrays.sort(copy1, leftIndex, rightIndex + 1);
 		}
+
 		Assert.assertArrayEquals(copy1, array);
 	}
 
@@ -145,5 +134,15 @@ public class StudentSortingTest {
 	@Test
 	public void testPartialSort05() {
 		genericTest(vetorVazio, 0, 0);
+	}
+
+	@Test
+	public void testPartialSort06() {
+		genericTest(vetorTamImpar, 0, 15);
+	}
+
+	@Test
+	public void testPartialSort07() {
+		genericTest(vetorTamImpar, -1, 10);
 	}
 }

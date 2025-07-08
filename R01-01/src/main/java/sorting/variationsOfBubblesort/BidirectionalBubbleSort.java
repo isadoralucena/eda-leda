@@ -15,28 +15,29 @@ public class BidirectionalBubbleSort<T extends Comparable<T>> extends
 
 	@Override
 	public void sort(T[] array, int leftIndex, int rightIndex) {
-		boolean swapped = true;
-		while (swapped) {
-			swapped = false;
-			for(int i = leftIndex; i < rightIndex; i++){
-				if (array[i].compareTo(array[i + 1]) > 0) {
-					Util.swap(array, i, i + 1);
-					swapped = true;
+		if (!(array == null || array.length == 0 || leftIndex < 0 || leftIndex > rightIndex || rightIndex > array.length - 1)){
+			boolean swapped = true;
+			while (swapped) {
+				swapped = false;
+				for(int i = leftIndex; i < rightIndex; i++){
+					if (array[i].compareTo(array[i + 1]) > 0) {
+						Util.swap(array, i, i + 1);
+						swapped = true;
+					}
 				}
-			}
-			rightIndex--;
+				rightIndex--;
 
-			if (!swapped) break;
-			swapped = false;
+				if (!swapped) break;
+				swapped = false;
 
-			for (int i = rightIndex; i > leftIndex; i--) {
-				if (array[i - 1].compareTo(array[i]) > 0) {
-					Util.swap(array, i - 1, i);
-					swapped = true;
+				for (int i = rightIndex; i > leftIndex; i--) {
+					if (array[i - 1].compareTo(array[i]) > 0) {
+						Util.swap(array, i - 1, i);
+						swapped = true;
+					}
 				}
+				leftIndex++;
 			}
-			leftIndex++;
 		}
-
 	}
 }
