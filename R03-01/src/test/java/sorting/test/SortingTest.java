@@ -101,7 +101,6 @@ public class SortingTest {
 			implementation.sort(array, leftIndex, rightIndex);
 			Arrays.sort(copy1, leftIndex, rightIndex + 1);
 		}
-		System.out.println("Depois da ordenação: " + Arrays.toString(array));
 
 		Assert.assertArrayEquals(copy1, array);
 	}
