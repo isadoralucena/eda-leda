@@ -19,18 +19,20 @@ public class RecursiveInsertionSort<T extends Comparable<T>> extends
 	 *  - para as trocas no array, utilize o metodo Util.swap
 	 */
 	@Override
-        public void sort(T[] array, int leftIndex, int rightIndex) {
-			if(array != null && leftIndex >= 0 && leftIndex <= rightIndex && rightIndex <= array.length - 1 && leftIndex < array.length) {
-				sort(array, leftIndex, rightIndex-1);
+	public void sort(T[] array, int leftIndex, int rightIndex) {
+		if (array.length > 0 && leftIndex >= 0 && rightIndex < array.length && leftIndex < rightIndex){
+			insertOrdered(array, leftIndex, rightIndex);
+			sort(array, leftIndex + 1, rightIndex);
+		}
+	}
 
-				T valueToInsert = array[rightIndex];
-				int insertionIndex = rightIndex;
-				while(insertionIndex - 1 >= leftIndex && valueToInsert.compareTo(array[insertionIndex-1]) < 0){
-					array[insertionIndex] = array[insertionIndex-1];
-					insertionIndex--;
-				}
-				array[insertionIndex] = valueToInsert;
+	private void insertOrdered(T[] array, int leftIndex, int rightIndex) {
+		if (leftIndex < rightIndex){
+			if (array[rightIndex].compareTo(array[rightIndex-1]) < 0){
+				Util.swap(array, rightIndex, rightIndex-1);
 			}
-    }
+			insertOrdered(array, leftIndex, rightIndex -1);
+		}
+	}
 }
      
