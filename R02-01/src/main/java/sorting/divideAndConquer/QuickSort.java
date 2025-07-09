@@ -22,7 +22,7 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSorting<T> {
 		}
 	}
 
-	public int partition(T[] array, int leftIndex, int rightIndex) {
+	private int partition(T[] array, int leftIndex, int rightIndex) {
 		T pivot = array[leftIndex];
 		int i = leftIndex;
 
@@ -34,7 +34,6 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSorting<T> {
         }
 
         Util.swap(array, leftIndex, i);
-        
         return i; 
     }
 }
