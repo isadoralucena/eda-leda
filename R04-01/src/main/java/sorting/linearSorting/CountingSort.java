@@ -17,8 +17,28 @@ public class CountingSort extends AbstractSorting<Integer> {
 
 	@Override
 	public void sort(Integer[] array, int leftIndex, int rightIndex) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
-	}
+		int indexMaximumInteger = leftIndex;
+		for(int i = leftIndex + 1; i <= rightIndex; i++){
+			if (array[i] > indexMaximumInteger){
+				indexMaximumInteger = i;
+			}
+		}
 
+		Integer[] auxArray = new Integer[indexMaximumInteger];
+
+		for(int i = leftIndex; i <= rightIndex; i++){
+			auxArray[array[i]] += 1;
+		}
+
+		for(int i = leftIndex + 1; i <= rightIndex; i++){
+			auxArray[i] += auxArray[i-1];
+		}
+
+		for(int i = rightIndex; i >= leftIndex; i--){
+			int element = array[i];
+			int occurence = auxArray[element] - auxArray[element -1];
+			array[occurence] = auxArray[element];
+			auxArray[element] -= 1;
+		}
+	}
 }

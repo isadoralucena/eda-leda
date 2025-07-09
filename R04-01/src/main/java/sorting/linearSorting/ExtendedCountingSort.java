@@ -4,7 +4,7 @@ import sorting.AbstractSorting;
 
 /**
  * Classe que implementa do Counting Sort vista em sala. Desta vez este
- * algoritmo deve satisfazer os seguitnes requisitos:
+ * algoritmo deve satisfazer os seguintes requisitos:
  * - Alocar o tamanho minimo possivel para o array de contadores (C)
  * - Ser capaz de ordenar arrays contendo numeros negativos
  */
