@@ -58,6 +58,7 @@ public class StudentSortingTest {
 		}
 		implementation.sort(array);
 		Arrays.sort(copy1);
+		System.out.println(java.util.Arrays.toString(array));
 		Assert.assertArrayEquals(copy1, array);
 	}
 

@@ -21,14 +21,10 @@ public class QuickSortMedianOfThree<T extends Comparable<T>> extends AbstractSor
 
 	public void sort(T[] array, int leftIndex, int rightIndex) {
 		if (!(array == null || array.length == 0 || leftIndex < 0 || rightIndex >= array.length || leftIndex >= rightIndex )){
-			//int pivotIndex = medianOfThree(array, leftIndex, rightIndex);
-			
-			 if (rightIndex - leftIndex + 1 > 3) { 
-				int pivotIndex = medianOfThree(array, leftIndex, rightIndex);
-				int pivotFinalPos = partition(array, leftIndex, rightIndex, pivotIndex);
-				sort(array, leftIndex, pivotFinalPos - 1);
-				sort(array, pivotFinalPos + 1, rightIndex);
-			} 
+			int pivotIndex = medianOfThree(array, leftIndex, rightIndex);
+			int pivotFinalPos = partition(array, leftIndex, rightIndex - 1, pivotIndex);
+			sort(array, leftIndex, pivotFinalPos - 1);
+			sort(array, pivotFinalPos + 1, rightIndex);
 		}
 	}
 
@@ -46,15 +42,14 @@ public class QuickSortMedianOfThree<T extends Comparable<T>> extends AbstractSor
 		return right - 1;
 	}
 
-
 	private int partition(T[] array, int leftIndex, int rightIndex, int pivotIndex) {
 		T  pivot = array[pivotIndex];
 		int i = leftIndex;
-		int j = rightIndex - 2;
+		int j = rightIndex;
 
 		while (true) {
-			while (array[++i].compareTo(pivot) < 0); 
-			while (array[--j].compareTo(pivot) > 0); 
+			while (i < rightIndex && array[++i].compareTo(pivot) < 0);
+			while (j > leftIndex && array[--j].compareTo(pivot) > 0);
 
 			if (i >= j) break;
 
