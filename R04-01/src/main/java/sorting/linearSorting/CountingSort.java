@@ -17,28 +17,32 @@ public class CountingSort extends AbstractSorting<Integer> {
 
 	@Override
 	public void sort(Integer[] array, int leftIndex, int rightIndex) {
-		int indexMaximumInteger = leftIndex;
+		int maximumInteger = array[leftIndex];
 		for(int i = leftIndex + 1; i <= rightIndex; i++){
-			if (array[i] > indexMaximumInteger){
-				indexMaximumInteger = i;
+			if (array[i] > maximumInteger){
+				maximumInteger = array[i];
 			}
 		}
 
-		Integer[] auxArray = new Integer[indexMaximumInteger];
+		Integer[] cumulativeSum = new Integer[maximumInteger+1];
+
+		for(int i = 0; i < cumulativeSum.length; i++){
+			cumulativeSum[i] = 0;
+		}
 
 		for(int i = leftIndex; i <= rightIndex; i++){
-			auxArray[array[i]] += 1;
+			cumulativeSum[array[i]] += 1;
 		}
 
-		for(int i = leftIndex + 1; i <= rightIndex; i++){
-			auxArray[i] += auxArray[i-1];
+		for(int i = 1; i < cumulativeSum.length; i++){
+			cumulativeSum[i] += cumulativeSum[i-1];
 		}
+
+		Integer[] orderedArray = new Integer[array.length];
 
 		for(int i = rightIndex; i >= leftIndex; i--){
-			int element = array[i];
-			int occurence = auxArray[element] - auxArray[element -1];
-			array[occurence] = auxArray[element];
-			auxArray[element] -= 1;
+			orderedArray[cumulativeSum[array[i]]] = array[i];
+			cumulativeSum[array[i]] -= 1;
 		}
 	}
 }
