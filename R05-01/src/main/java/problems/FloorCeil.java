@@ -5,7 +5,7 @@ package problems;
  * (e mais proximo possível de x) ou igual a x (podendo x pertencer ou nao ao array). 
  * Analogamente, ceil(x) seria o elemento do array que é maior (e mais próximo 
  * possível de x) ou igual a x.
- * Note que o floor de ceil de um numero que está no array é o pr[oprio número.
+ * Note que o floor de ceil de um numero que está no array é o próprio número.
  *
  * Caso o elemento não tenha floor nem ceil, deve retornar null
  * 
