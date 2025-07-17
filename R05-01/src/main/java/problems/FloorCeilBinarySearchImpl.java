@@ -16,7 +16,7 @@ public class FloorCeilBinarySearchImpl implements FloorCeil {
 	@Override
 	public Integer floor(Integer[] array, Integer x) {
 		Integer answer = -1;
-		if (array != null && array.length > 0) {
+		if (array != null && array.length > 0 && array[0] <= x) {
 			answer = binarySearchFloor(array, x, 0, array.length - 1);
 		}
 		return answer;
@@ -41,7 +41,7 @@ public class FloorCeilBinarySearchImpl implements FloorCeil {
 	@Override
 	public Integer ceil(Integer[] array, Integer x) {
 		Integer answer = -1;
-		if (array != null && array.length > 0) {
+		if (array != null && array.length > 0 && array[array.length-1] >= x) {
 			answer = binarySearchCeil(array, x, 0, array.length - 1);
 		}
 		return answer;
