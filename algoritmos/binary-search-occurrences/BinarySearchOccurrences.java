@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
-public class CountOccurrences {
-    public static int count(int[] array, int target){
+public class BinarySearchOccurrences {
+    public static int countOccurrences(int[] array, int target){
         int first = firstOccurrence(array, target, 0, array.length - 1);
         int last = lastOccurrence(array, target, 0, array.length - 1);
 
@@ -11,6 +11,11 @@ public class CountOccurrences {
         }
 
         return answer;
+    }
+
+    public static int sumOccurrences(int[] array, int target) {
+        int count = countOccurrences(array, target);
+        return target * count;
     }
 
     private static int firstOccurrence(int[] array, int target, int left, int right){
@@ -56,9 +61,15 @@ public class CountOccurrences {
 
     public static void main(String[] args) {
         int[] array = {1, 1, 2, 2, 2, 2, 4, 5};
-        System.out.println("Número de ocorrências de 2: " + count(array, 2));
-        System.out.println("Número de ocorrências de 1: " + count(array, 1));
-        System.out.println("Número de ocorrências de 5: " + count(array, 5));
-        System.out.println("Número de ocorrências de 3: " + count(array, 3));
+        System.out.println("Número de ocorrências de 2: " + countOccurrences(array, 2));
+        System.out.println("Soma das ocorrências de 2: " + sumOccurrences(array, 2));
+        System.out.println("Número de ocorrências de 1: " + countOccurrences(array, 1));
+        System.out.println("Soma das ocorrências de 1: " + sumOccurrences(array, 1));
+        System.out.println("Número de ocorrências de 5: " + countOccurrences(array, 5));
+        System.out.println("Soma das ocorrências de 5: " + sumOccurrences(array, 5));
+        System.out.println("Número de ocorrências de 3: " + countOccurrences(array, 3));
+        System.out.println("Soma das ocorrências de 3: " + sumOccurrences(array, 3));
+
+
     }
 }
