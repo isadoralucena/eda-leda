@@ -24,15 +24,13 @@ public class FloorCeilBinarySearchImpl implements FloorCeil {
 
 	private Integer binarySearchFloor(Integer[] array, Integer x, int left, int right){
 		Integer answer =  null;
-		if(left >= 0 && right < array.length){
-			while(left <= right){
-				int middle = (left + right)/2;
-				if(array[middle] <= x){
-					answer = array[middle];
-					left = middle + 1;
-				} else {
-					right = middle - 1;
-				}
+		while(left <= right){
+			int middle = (left + right)/2;
+			if(array[middle] <= x){
+				answer = array[middle];
+				left = middle + 1;
+			} else {
+				right = middle - 1;
 			}
 		}
 		return answer;
@@ -49,15 +47,13 @@ public class FloorCeilBinarySearchImpl implements FloorCeil {
 
 	private Integer binarySearchCeil(Integer[] array, Integer x, int left, int right){
 		Integer answer =  null;
-		if(left >= 0 && right < array.length){
-			while(left <= right){
-				int middle = (left + right)/2;
-				if(array[middle] >= x){
-					answer = array[middle];
-					right = middle - 1;
-				} else {
-					left = middle + 1;
-				}
+		while(left <= right){
+			int middle = (left + right)/2;
+			if(array[middle] >= x){
+				answer = array[middle];
+				right = middle - 1;
+			} else {
+				left = middle + 1;
 			}
 		}
 		return answer;
