@@ -15,15 +15,15 @@ public class FloorCeilBinarySearchImpl implements FloorCeil {
 
 	@Override
 	public Integer floor(Integer[] array, Integer x) {
-		Integer answer = -1;
-		if (array != null && array.length > 0 && array[0] <= x) {
+		Integer answer = null;
+		if (array != null && array.length > 0) {
 			answer = binarySearchFloor(array, x, 0, array.length - 1);
 		}
 		return answer;
 	}
 
 	private Integer binarySearchFloor(Integer[] array, Integer x, int left, int right){
-		Integer answer =  -1;
+		Integer answer =  null;
 		if(left >= 0 && right < array.length){
 			while(left <= right){
 				int middle = (left + right)/2;
@@ -40,15 +40,15 @@ public class FloorCeilBinarySearchImpl implements FloorCeil {
 
 	@Override
 	public Integer ceil(Integer[] array, Integer x) {
-		Integer answer = -1;
-		if (array != null && array.length > 0 && array[array.length-1] >= x) {
+		Integer answer = null;
+		if (array != null && array.length > 0) {
 			answer = binarySearchCeil(array, x, 0, array.length - 1);
 		}
 		return answer;
 	}
 
 	private Integer binarySearchCeil(Integer[] array, Integer x, int left, int right){
-		Integer answer =  -1;
+		Integer answer =  null;
 		if(left >= 0 && right < array.length){
 			while(left <= right){
 				int middle = (left + right)/2;
