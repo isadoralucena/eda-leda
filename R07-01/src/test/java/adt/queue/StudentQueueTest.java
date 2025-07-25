@@ -27,17 +27,14 @@ public class StudentQueueTest {
 		// Fila com 2 elementos de tamanho 2. Fila cheia.
 		queue2.enqueue(1);
 		queue2.enqueue(2);
-
 	}
 
 	private void getImplementations() {
-		// TODO O aluno deve ajustar aqui para instanciar sua implementação
-		queue1 = null;
-		queue2 = null;
-		queue3 = null;
+		queue1 = new QueueImpl<>(5);
+		queue2 = new QueueImpl<>(2);
+		queue3 = new QueueImpl<>(7);
 	}
 
-	// MÉTODOS DE TESTE
 	@Test
 	public void testHead() {
 		assertEquals(new Integer(1), queue1.head());
@@ -66,8 +63,7 @@ public class StudentQueueTest {
 
 	@Test(expected = QueueOverflowException.class)
 	public void testEnqueueComErro() throws QueueOverflowException {
-		queue1.enqueue(new Integer(5)); // vai depender do tamanho que a fila
-										// foi iniciada!!!
+		queue2.enqueue(new Integer(5));
 	}
 
 	@Test
@@ -82,8 +78,6 @@ public class StudentQueueTest {
 
 	@Test(expected = QueueUnderflowException.class)
 	public void testDequeueComErro() throws QueueUnderflowException {
-		assertEquals(new Integer(1), queue1.dequeue()); // vai depender do
-														// tamanho que a fial
-														// foi iniciada!!!
+		assertEquals(new Integer(1), queue3.dequeue());
 	}
 }

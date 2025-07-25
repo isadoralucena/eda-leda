@@ -1,5 +1,7 @@
 package adt.queue;
 
+import adt.stack.StackOverflowException;
+
 public class QueueImpl<T> implements Queue<T> {
 
 	private T[] array;
@@ -13,37 +15,46 @@ public class QueueImpl<T> implements Queue<T> {
 
 	@Override
 	public T head() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T answer = null;
+		if(!this.isEmpty()){
+			answer = array[0];
+		}
+		return answer;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return tail == -1;
 	}
 
 	@Override
 	public boolean isFull() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return tail == (array.length - 1);
 	}
 
 	private void shiftLeft() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		for(int i = 0; i < tail; i++){
+			array[i] = array[i+1];
+		}
 	}
 
 	@Override
 	public void enqueue(T element) throws QueueOverflowException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(this.isFull()){
+			throw new QueueOverflowException();
+		}
+		array[++tail] = element;
 	}
 
 	@Override
 	public T dequeue() throws QueueUnderflowException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(this.isEmpty()){
+			throw new QueueUnderflowException();
+		}
+		T answer = head();
+		shiftLeft();
+		array[tail] = null;
+		tail--;
+		return answer;
 	}
-
 }
