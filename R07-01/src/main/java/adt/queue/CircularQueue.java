@@ -7,6 +7,7 @@ public class CircularQueue<T> implements Queue<T> {
 	private int head;
 	private int elements;
 
+	@SuppressWarnings("unchecked")
 	public CircularQueue(int size) {
 		array = (T[]) new Object[size];
 		head = -1;
@@ -16,32 +17,49 @@ public class CircularQueue<T> implements Queue<T> {
 
 	@Override
 	public void enqueue(T element) throws QueueOverflowException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(this.isFull()){
+			throw new QueueOverflowException();
+		}
+		if(element != null){
+			tail = (tail + 1) % array.length;
+			array[tail] = element;
+			if(elements == 0){
+				head = tail;
+			}
+			elements++;
+		}
 	}
 
 	@Override
 	public T dequeue() throws QueueUnderflowException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(this.isEmpty()){
+			throw new QueueUnderflowException();
+		}
+
+		T answer = head();
+		array[head] = null;
+		head = (head + 1) % array.length;
+		elements--;
+		return answer;
 	}
 
 	@Override
 	public T head() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T answer = null;
+		if(!this.isEmpty()){
+			answer = array[head];
+		}
+		return answer;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return elements == 0;
 	}
 
 	@Override
 	public boolean isFull() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return elements == array.length;
 	}
 
 }
