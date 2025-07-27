@@ -43,7 +43,9 @@ public class QueueImpl<T> implements Queue<T> {
 		if(this.isFull()){
 			throw new QueueOverflowException();
 		}
-		array[++tail] = element;
+		if(element != null){
+			array[++tail] = element;
+		}
 	}
 
 	@Override
@@ -53,8 +55,7 @@ public class QueueImpl<T> implements Queue<T> {
 		}
 		T answer = head();
 		shiftLeft();
-		array[tail] = null;
-		tail--;
+		array[tail--] = null;
 		return answer;
 	}
 }

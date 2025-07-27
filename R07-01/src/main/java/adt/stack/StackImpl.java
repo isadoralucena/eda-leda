@@ -36,7 +36,9 @@ public class StackImpl<T> implements Stack<T> {
 		if(this.isFull()){
 			throw new StackOverflowException();
 		}
-		array[++top] = element;
+		if(element != null){
+			array[++top] = element;
+		}
 	}
 
 	@Override
@@ -45,8 +47,7 @@ public class StackImpl<T> implements Stack<T> {
 			throw new StackUnderflowException();
 		}
 		T answer = top();
-		array[top] = null;
-		top --;
+		array[top--] = null;
 		return answer;
 	}
 }
