@@ -10,42 +10,80 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented!");
+		return this.getHead().isNIL();
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented!");
+		int size = 0;
+		SingleLinkedListNode<T> auxHead = this.getHead();
+		while(!auxHead.isNIL()){
+			auxHead = auxHead.getNext();
+			size++;
+		}
+		return size;
 	}
 
 	@Override
 	public T search(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented!");
+		SingleLinkedListNode<T> auxHead = this.getHead();
+
+		while(!auxHead.isNIL() && auxHead.getData() != element){
+			auxHead = auxHead.getNext();
+		}
+
+		return auxHead.getData();
 	}
 
 	@Override
 	public void insert(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented!");
+		SingleLinkedListNode<T> auxHead = this.getHead();
+
+		if(element != null){
+			if(head.isNIL()){
+				SingleLinkedListNode<T> newHead = new SingleLinkedListNode<T>(element, auxHead);
+				this.setHead(newHead);
+			} else{
+				while(!auxHead.isNIL()){
+					auxHead = auxHead.getNext();
+				}
+				auxHead.setData(element);
+				auxHead.setNext(new SingleLinkedListNode<>());
+			}
+		}
 	}
 
 	@Override
 	public void remove(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented!");
+		SingleLinkedListNode<T> auxHead = this.getHead();
+
+		while(auxHead.getNext().getData() != element){
+			auxHead = auxHead.getNext();
+		}
+
+		if(!auxHead.isNIL()){
+			auxHead.setNext(auxHead.getNext().getNext());	
+		}		
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public T[] toArray() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented!");
+		SingleLinkedListNode<T> auxHead = this.getHead();
+		T[] answer = (T[]) new Object[size()];
+
+		int count = 0;
+		while(!auxHead.isNIL()){
+			answer[count] = auxHead.getData();
+			auxHead = auxHead.getNext();
+			count++;
+		}
+
+		return answer;
 	}
 
 	public SingleLinkedListNode<T> getHead() {
-		return head;
+		return this.head;
 	}
 
 	public void setHead(SingleLinkedListNode<T> head) {
