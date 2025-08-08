@@ -17,10 +17,12 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 	public int size() {
 		int size = 0;
 		SingleLinkedListNode<T> auxHead = this.getHead();
+
 		while(!auxHead.isNIL()){
 			auxHead = auxHead.getNext();
 			size++;
 		}
+
 		return size;
 	}
 
@@ -28,7 +30,7 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 	public T search(T element) {
 		SingleLinkedListNode<T> auxHead = this.getHead();
 
-		while(!auxHead.isNIL() && auxHead.getData() != element){
+		while(!auxHead.isNIL() && !auxHead.getData().equals(element)){
 			auxHead = auxHead.getNext();
 		}
 
@@ -55,31 +57,34 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 
 	@Override
 	public void remove(T element) {
-		SingleLinkedListNode<T> auxHead = this.getHead();
+		if(!this.isEmpty() && element != null){
+			SingleLinkedListNode<T> auxHead = this.getHead();
 
-		while(auxHead.getNext().getData() != element){
-			auxHead = auxHead.getNext();
+			while(!auxHead.isNIL() && !auxHead.getData().equals(element)){
+				auxHead = auxHead.getNext();
+			}
+
+			if(!auxHead.isNIL()){
+				auxHead.setData(auxHead.getNext().getData());
+				auxHead.setNext(auxHead.getNext().getNext());	
+			}		
 		}
-
-		if(!auxHead.isNIL()){
-			auxHead.setNext(auxHead.getNext().getNext());	
-		}		
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public T[] toArray() {
 		SingleLinkedListNode<T> auxHead = this.getHead();
-		T[] answer = (T[]) new Object[size()];
+		T[] array = (T[]) new Object[size()];
 
 		int count = 0;
 		while(!auxHead.isNIL()){
-			answer[count] = auxHead.getData();
+			array[count] = auxHead.getData();
 			auxHead = auxHead.getNext();
 			count++;
 		}
 
-		return answer;
+		return array;
 	}
 
 	public SingleLinkedListNode<T> getHead() {
