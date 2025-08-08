@@ -21,9 +21,9 @@ public class StudentDoubleLinkedListTest extends StudentLinkedListTest {
 	}
 
 	private void getImplementations() {
-		lista1 = new DoubleLinkedListImpl<>();
-		lista2 = new DoubleLinkedListImpl<>();;
-		lista3 = new DoubleLinkedListImpl<>();;
+		lista1 = new RecursiveDoubleLinkedListImpl<>();
+		lista2 = new RecursiveDoubleLinkedListImpl<>();;
+		lista3 = new RecursiveDoubleLinkedListImpl<>();;
 	}
 
 	@Test
