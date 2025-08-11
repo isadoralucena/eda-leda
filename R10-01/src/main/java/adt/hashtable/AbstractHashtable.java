@@ -17,8 +17,7 @@ public abstract class AbstractHashtable<T> implements Hashtable<T> {
 	protected Object[] table; // the internal table
 	protected int elements; // the number of elements inserted into the hash table
 	protected int COLLISIONS; // the number of collisions occurred in this hashtable
-	protected HashFunction<T> hashFunction; // the hash function used by this
-											// hashtable.
+	protected HashFunction<T> hashFunction; // the hash function used by this hashtable.
 
 	public AbstractHashtable() {
 		elements = 0;
