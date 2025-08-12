@@ -1,5 +1,7 @@
 package adt.hashtable.open;
 
+import java.util.LinkedList;
+
 import adt.hashtable.hashfunction.HashFunctionClosedAddressMethod;
 import adt.hashtable.hashfunction.HashFunctionLinearProbing;
 
@@ -39,20 +41,50 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 
 	@Override
 	public void remove(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(element != null && search(element) != null){
+			int probe = 0;
+			while(probe < this.table.length){
+				int hashCode = getHashFunction(element, probe);
+
+				if(table[hashCode] != null && table[hashCode].equals(element)){
+					table[hashCode] = new DELETED();
+					this.elements--;
+
+					if(probe >= 1) this.COLLISIONS--;
+
+				}else{
+					probe++;
+				}
+			}
+		}
 	}
 
 	@Override
 	public T search(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T answer =  null;
+		if(indexOf(element) != -1){
+			answer = element;
+		}
+		return answer;
 	}
 
 	@Override
 	public int indexOf(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int index = -1;
+
+		if(element != null){
+			int probe = 0;
+			while(probe < this.table.length){
+				int hashCode = getHashFunction(element, probe);
+				if(table[hashCode] != null && table[hashCode].equals(element)){
+					index = hashCode;
+					break;
+				}else{
+					probe++;
+				}
+			}
+		}
+		return index;
 	}
 
 	private int getHashFunction(T element, int probe){

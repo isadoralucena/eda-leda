@@ -64,10 +64,8 @@ public class StudentTestHashtableOpenAddressQuadraticProbing {
 	@Test
 	public void testSearch() {
 		assertEquals(new HashtableElement(4),
-				table1.search(new HashtableElement(4))); // elemento que existe
-		assertNull(table1.search(new HashtableElement(14))); // elemento que nao
-																// existe
-
+		table1.search(new HashtableElement(4))); // elemento que existe
+		assertNull(table1.search(new HashtableElement(14))); // elemento que nao existe
 	}
 
 	@Test

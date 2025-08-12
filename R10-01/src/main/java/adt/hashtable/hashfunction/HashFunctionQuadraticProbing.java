@@ -8,8 +8,7 @@ public class HashFunctionQuadraticProbing<T> implements
 	protected int c1;
 	protected int c2;
 
-	public HashFunctionQuadraticProbing(int tableSize,
-			HashFunctionClosedAddressMethod method, int c1, int c2) {
+	public HashFunctionQuadraticProbing(int tableSize, HashFunctionClosedAddressMethod method, int c1, int c2) {
 		this.tableSize = tableSize;
 		if (method == HashFunctionClosedAddressMethod.DIVISION) {
 			originalHashFunction = new HashFunctionDivisionMethod<T>(

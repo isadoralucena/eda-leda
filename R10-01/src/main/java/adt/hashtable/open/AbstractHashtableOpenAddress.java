@@ -2,8 +2,7 @@ package adt.hashtable.open;
 
 import adt.hashtable.AbstractHashtable;
 
-public abstract class AbstractHashtableOpenAddress<T extends Storable> extends
-		AbstractHashtable<T> {
+public abstract class AbstractHashtableOpenAddress<T extends Storable> extends AbstractHashtable<T> {
 
 	protected final DELETED deletedElement = new DELETED();
 	private int tableSize;

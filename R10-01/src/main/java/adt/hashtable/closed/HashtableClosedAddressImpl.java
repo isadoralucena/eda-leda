@@ -93,10 +93,10 @@ public class HashtableClosedAddressImpl<T> extends AbstractHashtableClosedAddres
 			LinkedList<T> listTable = (LinkedList<T>) this.table[hashCode];
 			if (listTable != null && listTable.contains(element)) {
 				if(listTable.size() > 1){
-					this.COLLISIONS -= 1;
+					this.COLLISIONS--;
 				}
 				listTable.remove(element);
-				this.elements -= 1;
+				this.elements--;
 			}
 		}
 	}

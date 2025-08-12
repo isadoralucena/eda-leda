@@ -5,8 +5,7 @@ public class HashFunctionLinearProbing<T> implements HashFunctionOpenAddress<T> 
 	protected HashFunctionClosedAddress<T> originalHashFunction;
 	private int tableSize;
 
-	public HashFunctionLinearProbing(int tableSize,
-			HashFunctionClosedAddressMethod method) {
+	public HashFunctionLinearProbing(int tableSize, HashFunctionClosedAddressMethod method) {
 		this.tableSize = tableSize;
 		if (method == HashFunctionClosedAddressMethod.DIVISION) {
 			originalHashFunction = new HashFunctionDivisionMethod<T>(
