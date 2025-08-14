@@ -10,6 +10,7 @@ import java.util.Queue;
  */
 public class StackWithTwoQueues {
   private int maxSize = 10;
+  private Integer topElement = null;
   private Queue<Integer> queue1 = new LinkedList<>();
   private Queue<Integer> queue2 = new LinkedList<>();
 
@@ -26,35 +27,37 @@ public class StackWithTwoQueues {
   }
 
   public Integer top(){
-    Integer last = null;
-    for (Integer val : queue1) {
-      last = val;
-    }
-    return last;
+    return this.topElement;
   }
 
   public void push(Integer element){
     if(this.isFull()){
       throw new StackOverflowException();
     }
-    queue1.add(element);
+    if(element != null){
+      queue1.add(element);
+      topElement = element; 
+    }
   }
   
-  public void pop(){
+  public Integer pop(){
     if(this.isEmpty()){
 			throw new StackUnderflowException();
 		}
 
-
       while(queue1.size() > 1){
-        queue2.add(queue1.remove());
+        Integer val = queue1.remove();
+        queue2.add(val);
+        this.topElement = val; 
       }
 
-      queue1.remove();
+      Integer answer = queue1.remove();
 
       Queue<Integer> temp = queue1;
       queue1 = queue2;
       queue2 = temp;
+
+      return answer;
   }
 
   public static void main(String[] args) {
