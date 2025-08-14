@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class BinarySearchOccurrences {
     public static int countOccurrences(int[] array, int target){
         int first = firstOccurrence(array, target, 0, array.length - 1);

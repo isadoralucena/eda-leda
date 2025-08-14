@@ -4,6 +4,7 @@ import java.util.List;
 
 public class BucketSort {
 
+    @SuppressWarnings("unchecked")
     public static void bucketSort(float[] array) {
         int n = array.length;
         if (n <= 0)
