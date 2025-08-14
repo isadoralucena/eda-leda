@@ -1,7 +1,17 @@
 package queuewts;
 
 import java.util.Stack;
-
+/*
+ * Nesta implementação de fila com duas pilhas:
+ * - A stack1 sempre será onde os elementos são inseridos (enqueue)
+ * - A stack2 é usada na remoção (dequeue) e para verificar o head
+ * - Se stack2 estiver vazia, transfere todos os elementos de stack1 para stack2 
+ *   (invertendo a ordem, colocando o mais antigo no topo de stack2)
+ * Isso garante:
+ * - enqueue(): O(1) (no pior caso)
+ * - dequeue(): O(1) (amortizado)
+ * - head(): O(1) (amortizado)
+ */
 public class QueueWithTwoStacks{
   private int maxSize = 10; 
   private Stack<Integer> stack1 = new Stack<>();
@@ -22,7 +32,7 @@ public class QueueWithTwoStacks{
 
     if (stack2.isEmpty()) {
       transferStack1ToStack2();
-  }
+    }
         
     return stack2.pop();
   }
@@ -48,7 +58,7 @@ public class QueueWithTwoStacks{
 
   public boolean contains(Integer element){
     boolean answer = false;
-    
+
     if(element != null){
       answer = stack1.contains(element) || stack2.contains(element);
     }
