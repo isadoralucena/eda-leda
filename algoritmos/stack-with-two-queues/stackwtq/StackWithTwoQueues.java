@@ -2,7 +2,12 @@ package stackwtq;
 
 import java.util.LinkedList;
 import java.util.Queue;
-
+/*
+ * Nesta implementação de pilha com duas filas:
+ * - A fila queue1 será responsável por armazenar todos os elementos e realizar as operações principais
+ * - A fila queue2 funciona apenas como auxiliar durante a operação de remoção (pop)
+ * - As demais operações (push, top, isEmpty, isFull) acontecem somente em queue1
+ */
 public class StackWithTwoQueues {
   private int maxSize = 10;
   private Queue<Integer> queue1 = new LinkedList<>();
