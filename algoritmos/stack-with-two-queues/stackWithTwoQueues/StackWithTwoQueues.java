@@ -1,4 +1,4 @@
-package stackwtq;
+package stackWithTwoQueues;
 
 import java.util.LinkedList;
 import java.util.Queue;

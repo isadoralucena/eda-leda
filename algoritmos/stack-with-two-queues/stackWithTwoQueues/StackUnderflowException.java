@@ -1,4 +1,4 @@
-package stackwtq;
+package stackWithTwoQueues;
 
 public class StackUnderflowException extends RuntimeException {
 	public StackUnderflowException() {

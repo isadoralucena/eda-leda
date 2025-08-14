@@ -1,4 +1,4 @@
-package queuewts;
+package queueWithTwoStacks;
 
 public class QueueUnderflowException extends RuntimeException {
 	public QueueUnderflowException() {

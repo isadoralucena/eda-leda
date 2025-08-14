@@ -1,4 +1,4 @@
-package queuewts;
+package queueWithTwoStacks;
 
 import java.util.Stack;
 /*
