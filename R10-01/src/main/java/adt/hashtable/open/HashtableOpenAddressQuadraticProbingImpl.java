@@ -15,7 +15,7 @@ public class HashtableOpenAddressQuadraticProbingImpl<T extends Storable>extends
 	public void insert(T element) {
 		if(isFull()) throw new HashtableOverflowException();
 
-		if(element != null && search(element) == null){
+		if(element != null){
 			int probe = 0;
 			int hashCode = -1;
 			boolean inserted = false;
@@ -40,7 +40,7 @@ public class HashtableOpenAddressQuadraticProbingImpl<T extends Storable>extends
 
 	@Override
 	public void remove(T element) {
-		if(element != null && search(element) != null){
+		if(element != null){
 			int probe = 0;
 			int hashCode = -1;
 			boolean removed = false;
