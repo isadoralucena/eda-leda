@@ -52,60 +52,61 @@ public class HashtableClosedAddressImpl<T> extends AbstractHashtableClosedAddres
 	 * prime.
 	 */
 	int getPrimeAbove(int number) {
-		int answer = number;
-
-		if (Util.isPrime(number)) {
-      answer = number;
-    }else{
-			answer = getPrimeAbove(number + 1);
-		}
-
-		return answer;
+		while (!Util.isPrime(number)) {
+      number++;
+    }
+    return number;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void insert(T element) {
-		if(element != null && search(element) == null){
+		if(element != null){
 			int hashCode = getHashFunction(element);
 
 			if(table[hashCode] == null){
 				table[hashCode] = new LinkedList<T>();
-			}else{
-				this.COLLISIONS += 1;
 			}
-			
+
 			LinkedList<T> listTable = (LinkedList<T>) this.table[hashCode];
 
-			if (!listTable.contains(element)) {
-				listTable.add(element);
-				this.elements += 1;
+			if (!listTable.isEmpty() && !listTable.contains(element)) {
+				this.COLLISIONS++;
 			}
+
+			listTable.add(element);
+			this.elements++;
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void remove(T element) {
-		if (element != null && search(element) != null){
+		if (element != null){
 			int hashCode = getHashFunction(element);
 
 			LinkedList<T> listTable = (LinkedList<T>) this.table[hashCode];
-			if (listTable != null && listTable.contains(element)) {
-				if(listTable.size() > 1){
-					this.COLLISIONS--;
-				}
-				listTable.remove(element);
+
+			if (listTable != null && !listTable.isEmpty() && listTable.remove(element)) {
 				this.elements--;
 			}
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T search(T element) {
 		T answer =  null;
-		if(indexOf(element) != -1){
-			answer = element;
+		if (element != null){
+			int hashCode = getHashFunction(element);
+			LinkedList<T> listTable = (LinkedList<T>) this.table[hashCode];
+			if (listTable != null){
+				for (T item : listTable){
+					if (item.equals(element)){
+						answer = item;
+					}
+				}
+			}
 		}
 		return answer;
 	}
@@ -114,9 +115,11 @@ public class HashtableClosedAddressImpl<T> extends AbstractHashtableClosedAddres
 	@Override
 	public int indexOf(T element) {
 		int index = -1;
+
 		if(element != null){
 			int hashCode = this.getHashFunction(element);
 			LinkedList<T> listTable = (LinkedList<T>) this.table[hashCode];
+
 			if(listTable != null && listTable.contains(element)){
 				index = hashCode;
 			}
