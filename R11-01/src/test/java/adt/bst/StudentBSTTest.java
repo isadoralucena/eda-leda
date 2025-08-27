@@ -150,6 +150,8 @@ public class StudentBSTTest {
 
 		assertEquals(new Integer(-40), tree.search(-40).getData());
 		assertEquals(new Integer(-34), tree.search(-34).getData());
+		assertEquals(new Integer(23), tree.search(23).getData());
+		assertEquals(new Integer(0), tree.search(0).getData());
 		assertEquals(NIL, tree.search(2534));
 	}
 }
