@@ -8,10 +8,11 @@ import org.junit.Test;
 import adt.bst.BSTImpl;
 import adt.bt.BTNode;
 
-public class StudentBSTTest {
+public class StudentBSTTest<T> {
 
 	private BSTImpl<Integer> tree;
 	private BTNode<Integer> NIL = new BTNode<Integer>();
+	private SimpleBSTManipulation<Integer> bstManipulation;
 
 	private void fillTree() {
 		Integer[] array = { 6, 23, -34, 5, 9, 2, 0, 76, 12, 67, 232, -40 };
@@ -20,9 +21,18 @@ public class StudentBSTTest {
 		}
 	}
 
+	private BSTImpl<Integer> createTree(Integer... values) {
+    BSTImpl<Integer> newTree = new BSTImpl<>();
+    for (Integer v : values) {
+        newTree.insert(v);
+    }
+    return newTree;
+	}
+
 	@Before
 	public void setUp() {
 		tree = new BSTImpl<>();
+		bstManipulation = new SimpleBSTManipulationImpl<>();
 	}
 
 	@Test
@@ -153,5 +163,15 @@ public class StudentBSTTest {
 		assertEquals(new Integer(23), tree.search(23).getData());
 		assertEquals(new Integer(0), tree.search(0).getData());
 		assertEquals(NIL, tree.search(2534));
+	}
+
+	@Test
+	public void testEquals(){
+		BSTImpl<Integer> tree1 = createTree(6, 23, -34, 5, 9, 2, 0, 76, 12, 67, 232, -40);
+		BSTImpl<Integer> tree2 = createTree(6, 23, -34, 5, 9, 2, 0, 76, 12, 67, 232, -40);
+		BSTImpl<Integer> tree3 = createTree(6, 23, -34, 5, 9, 2, 0, 76, 12, 67, 232, -50);
+		assertTrue(bstManipulation.equals(tree1,tree2));
+		assertFalse(bstManipulation.equals(tree1, tree3));
+		assertFalse(bstManipulation.equals(tree2, tree3));
 	}
 }
