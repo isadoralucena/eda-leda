@@ -208,22 +208,22 @@ public class StudentBSTTest<T> {
 	}
 
 	@Test
-public void testFloorCeil() {
-	Integer[] treeArray = { 6, 23, -34, 5, 9, 2, 0, 76, 12, 67, 232, -40 };
+	public void testFloorCeil() {
+		Integer[] treeArray = { 6, 23, -34, 5, 9, 2, 0, 76, 12, 67, 232, -40 };
 
-	assertEquals(Integer.valueOf(-40), floorCeil.floor(treeArray, -39.5));
-	assertEquals(Integer.valueOf(-34), floorCeil.floor(treeArray, -34.0));
-	assertEquals(Integer.valueOf(0), floorCeil.floor(treeArray, 1.5));
-	assertEquals(Integer.valueOf(9), floorCeil.floor(treeArray, 10));
-	assertEquals(Integer.valueOf(232), floorCeil.floor(treeArray, 300));
-	assertNull(floorCeil.floor(treeArray, -100));                           
+		assertEquals(Integer.valueOf(-40), floorCeil.floor(treeArray, -39.5));
+		assertEquals(Integer.valueOf(-34), floorCeil.floor(treeArray, -34.0));
+		assertEquals(Integer.valueOf(0), floorCeil.floor(treeArray, 1.5));
+		assertEquals(Integer.valueOf(9), floorCeil.floor(treeArray, 10));
+		assertEquals(Integer.valueOf(232), floorCeil.floor(treeArray, 300));
+		assertNull(floorCeil.floor(treeArray, -100));                           
 
-	assertEquals(Integer.valueOf(-34), floorCeil.ceil(treeArray, -35));    
-	assertEquals(Integer.valueOf(0), floorCeil.ceil(treeArray, 0));        
-	assertEquals(Integer.valueOf(2), floorCeil.ceil(treeArray, 1.5)); 
-	assertEquals(Integer.valueOf(12), floorCeil.ceil(treeArray, 10));
-	assertEquals(Integer.valueOf(232), floorCeil.ceil(treeArray, 232));    
-	assertNull(floorCeil.ceil(treeArray, 300));
+		assertEquals(Integer.valueOf(-34), floorCeil.ceil(treeArray, -35));    
+		assertEquals(Integer.valueOf(0), floorCeil.ceil(treeArray, 0));        
+		assertEquals(Integer.valueOf(2), floorCeil.ceil(treeArray, 1.5)); 
+		assertEquals(Integer.valueOf(12), floorCeil.ceil(treeArray, 10));
+		assertEquals(Integer.valueOf(232), floorCeil.ceil(treeArray, 232));    
+		assertNull(floorCeil.ceil(treeArray, 300));
 	}
 
 	@Test

@@ -1,5 +1,8 @@
 package adt.bst;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * - Esta eh a unica classe que pode ser modificada 
  * @author adalbertocajueiro
@@ -44,34 +47,44 @@ public class SimpleBSTManipulationImpl<T extends Comparable<T>> implements Simpl
 
 	@Override
 	public T orderStatistic(BST<T> tree, int k) {
-		int treeSize = tree.size();
 		T answer = null;
-		if (k >= 1 && k <= treeSize) {
-			answer = this.orderStatistic((BSTNode<T>) tree.getRoot(), k);
+		if (k >= 1) {
+			Map<BSTNode<T>,Integer> subtreeSizes = new HashMap<>();
+    	computeSubtreeSizes((BSTNode<T>) tree.getRoot(), subtreeSizes);
+			answer = this.orderStatistic((BSTNode<T>) tree.getRoot(), k, subtreeSizes);
 		}
 		return answer;
 	}
 
-	private T orderStatistic(BSTNode<T> node, int k){
+	private T orderStatistic(BSTNode<T> node, int k, Map<BSTNode<T>,Integer> sizes){
 		T answer = null;
 
 		if(!node.isEmpty()){
-			int sizeLeft = size((BSTNode<T>) node.getLeft());
+			int sizeLeft = sizes.getOrDefault(node.getLeft(), 0);
 			if (k == sizeLeft + 1) {
         answer = node.getData();
 			} else if (k <= sizeLeft) {
-				answer = orderStatistic((BSTNode<T>) node.getLeft(), k);
+				answer = orderStatistic((BSTNode<T>) node.getLeft(), k, sizes);
 			} else {
-				answer = orderStatistic((BSTNode<T>) node.getRight(), k - (sizeLeft+1));
+				answer = orderStatistic((BSTNode<T>) node.getRight(), k - (sizeLeft+1), sizes);
 			}
 		}
 		return answer;
 	}
 
-	private int size(BSTNode<T> node) {
-    if (node == null || node.isEmpty()) {
-      return 0;
-    }
-    return 1 + size((BSTNode<T>) node.getLeft()) + size((BSTNode<T>) node.getRight());
+	/*
+	 * Computes and stores the size of each subtree rooted at the given node
+	 * The size of a subtree is the number of non-empty nodes it contains
+	 * This helps improve the efficiency of accessing subtree sizes later
+	 */
+	private int computeSubtreeSizes(BSTNode<T> node, Map<BSTNode<T>,Integer> sizes) {
+		int totalSize = 0;
+    if (node != null && !node.isEmpty()) {
+			int leftSize = computeSubtreeSizes((BSTNode<T>) node.getLeft(), sizes);
+			int rightSize = computeSubtreeSizes((BSTNode<T>) node.getRight(), sizes);
+			totalSize = 1 + leftSize + rightSize;
+			sizes.put(node, totalSize);
+		}
+		return totalSize;
 	}
 }
