@@ -37,21 +37,41 @@ public class SimpleBSTManipulationImpl<T extends Comparable<T>> implements Simpl
 		}else{
 			answer = !node1.isEmpty() && !node2.isEmpty()
 									&& this.isSimilar((BSTNode<T>) node1.getLeft(), (BSTNode<T>) node2.getLeft())
-									&& this.isSimilar((BSTNode<T>) node1.getLeft(), (BSTNode<T>) node2.getLeft());
+									&& this.isSimilar((BSTNode<T>) node1.getRight(), (BSTNode<T>) node2.getRight());
 		}
 		return answer;
 	}
 
 	@Override
 	public T orderStatistic(BST<T> tree, int k) {
-		return this.orderStatistic((BSTNode<T>) tree.getRoot(), k);
+		int treeSize = tree.size();
+		T answer = null;
+		if (k >= 1 && k <= treeSize) {
+			answer = this.orderStatistic((BSTNode<T>) tree.getRoot(), k);
+		}
+		return answer;
 	}
 
 	private T orderStatistic(BSTNode<T> node, int k){
-		T answer = node.getData();
+		T answer = null;
+
 		if(!node.isEmpty()){
-			
+			int sizeLeft = size((BSTNode<T>) node.getLeft());
+			if (k == sizeLeft + 1) {
+        answer = node.getData();
+			} else if (k <= sizeLeft) {
+				answer = orderStatistic((BSTNode<T>) node.getLeft(), k);
+			} else {
+				answer = orderStatistic((BSTNode<T>) node.getRight(), k - (sizeLeft+1));
+			}
 		}
 		return answer;
+	}
+
+	private int size(BSTNode<T> node) {
+    if (node == null || node.isEmpty()) {
+      return 0;
+    }
+    return 1 + size((BSTNode<T>) node.getLeft()) + size((BSTNode<T>) node.getRight());
 	}
 }

@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import adt.bst.BSTImpl;
+import adt.bst.extended.FloorCeilBSTImpl;
 import adt.bt.BTNode;
 
 public class StudentBSTTest<T> {
@@ -13,6 +14,8 @@ public class StudentBSTTest<T> {
 	private BSTImpl<Integer> tree;
 	private BTNode<Integer> NIL = new BTNode<Integer>();
 	private SimpleBSTManipulation<Integer> bstManipulation;
+	private FloorCeilBSTImpl floorCeil;
+	private Integer[] treeArray = { 6, 23, -34, 5, 9, 2, 0, 76, 12, 67, 232, -40 };
 
 	private void fillTree() {
 		Integer[] array = { 6, 23, -34, 5, 9, 2, 0, 76, 12, 67, 232, -40 };
@@ -33,6 +36,7 @@ public class StudentBSTTest<T> {
 	public void setUp() {
 		tree = new BSTImpl<>();
 		bstManipulation = new SimpleBSTManipulationImpl<>();
+		floorCeil = new FloorCeilBSTImpl();
 	}
 
 	@Test
@@ -66,49 +70,48 @@ public class StudentBSTTest<T> {
 	@Test
 	public void testMinMax() {
 		tree.insert(6);
-		assertEquals(new Integer(6), tree.minimum().getData());
-		assertEquals(new Integer(6), tree.maximum().getData());
+		assertEquals(Integer.valueOf(6), tree.minimum().getData());
+		assertEquals(Integer.valueOf(6), tree.maximum().getData());
 
 		tree.insert(23);
-		assertEquals(new Integer(6), tree.minimum().getData());
-		assertEquals(new Integer(23), tree.maximum().getData());
+		assertEquals(Integer.valueOf(6), tree.minimum().getData());
+		assertEquals(Integer.valueOf(23), tree.maximum().getData());
 
 		tree.insert(-34);
-		assertEquals(new Integer(-34), tree.minimum().getData());
-		assertEquals(new Integer(23), tree.maximum().getData());
+		assertEquals(Integer.valueOf(-34), tree.minimum().getData());
+		assertEquals(Integer.valueOf(23), tree.maximum().getData());
 
 		tree.insert(5);
-		assertEquals(new Integer(-34), tree.minimum().getData());
-		assertEquals(new Integer(23), tree.maximum().getData());
+		assertEquals(Integer.valueOf(-34), tree.minimum().getData());
+		assertEquals(Integer.valueOf(23), tree.maximum().getData());
 
 		tree.insert(9);
-		assertEquals(new Integer(-34), tree.minimum().getData());
-		assertEquals(new Integer(23), tree.maximum().getData());
+		assertEquals(Integer.valueOf(-34), tree.minimum().getData());
+		assertEquals(Integer.valueOf(23), tree.maximum().getData());
 	}
 
 	@Test
 	public void testSucessorPredecessor() {
-
 		fillTree(); // -40 -34 0 2 5 6 9 12 23 67 76 232
 
-		assertEquals(null, tree.predecessor(-40));
-		assertEquals(new Integer(-34), tree.sucessor(-40).getData());
+		assertNull(tree.predecessor(-40));
+		assertEquals(Integer.valueOf(-34), tree.sucessor(-40).getData());
 
-		assertEquals(new Integer(-40), tree.predecessor(-34).getData());
-		assertEquals(new Integer(0), tree.sucessor(-34).getData());
+		assertEquals(Integer.valueOf(-40), tree.predecessor(-34).getData());
+		assertEquals(Integer.valueOf(0), tree.sucessor(-34).getData());
 
-		assertEquals(new Integer(-34), tree.predecessor(0).getData());
-		assertEquals(new Integer(2), tree.sucessor(0).getData());
+		assertEquals(Integer.valueOf(-34), tree.predecessor(0).getData());
+		assertEquals(Integer.valueOf(2), tree.sucessor(0).getData());
 
-		assertEquals(new Integer(0), tree.predecessor(2).getData());
-		assertEquals(new Integer(5), tree.sucessor(2).getData());
+		assertEquals(Integer.valueOf(0), tree.predecessor(2).getData());
+		assertEquals(Integer.valueOf(5), tree.sucessor(2).getData());
 	}
 
 	@Test
 	public void testSize() {
 		fillTree(); // -40 -34 0 2 5 6 9 12 23 67 76 232
 
-		int size = 12;
+		int size = treeArray.length;
 		assertEquals(size, tree.size());
 
 		while (!tree.isEmpty()) {
@@ -119,11 +122,7 @@ public class StudentBSTTest<T> {
 
 	@Test
 	public void testHeight() {
-		fillTree(); // -40 -34 0 2 5 6 9 12 23 67 76 232
-
-		Integer[] preOrder = new Integer[] { 6, -34, -40, 5, 2, 0, 23, 9, 12,
-				76, 67, 232 };
-		assertArrayEquals(preOrder, tree.preOrder());
+		fillTree();
 		assertEquals(4, tree.height());
 
 		tree.remove(0);
@@ -135,8 +134,7 @@ public class StudentBSTTest<T> {
 
 	@Test
 	public void testRemove() {
-		fillTree(); // -40 -34 0 2 5 6 9 12 23 67 76 232
-
+		fillTree();
 		Integer[] order = { -40, -34, 0, 2, 5, 6, 9, 12, 23, 67, 76, 232 };
 		assertArrayEquals(order, tree.order());
 
@@ -149,29 +147,112 @@ public class StudentBSTTest<T> {
 		assertArrayEquals(order, tree.order());
 
 		assertEquals(NIL, tree.search(6));
-		assertEquals(NIL, tree.search(9));
-
+    assertEquals(NIL, tree.search(9));
 	}
 
 	@Test
 	public void testSearch() {
-
-		fillTree(); // -40 -34 0 2 5 6 9 12 23 67 76 232
-
-		assertEquals(new Integer(-40), tree.search(-40).getData());
-		assertEquals(new Integer(-34), tree.search(-34).getData());
-		assertEquals(new Integer(23), tree.search(23).getData());
-		assertEquals(new Integer(0), tree.search(0).getData());
+		fillTree();
+		assertEquals(Integer.valueOf(-40), tree.search(-40).getData());
+		assertEquals(Integer.valueOf(-34), tree.search(-34).getData());
+		assertEquals(Integer.valueOf(23), tree.search(23).getData());
+		assertEquals(Integer.valueOf(0), tree.search(0).getData());
 		assertEquals(NIL, tree.search(2534));
 	}
 
 	@Test
 	public void testEquals(){
-		BSTImpl<Integer> tree1 = createTree(6, 23, -34, 5, 9, 2, 0, 76, 12, 67, 232, -40);
-		BSTImpl<Integer> tree2 = createTree(6, 23, -34, 5, 9, 2, 0, 76, 12, 67, 232, -40);
+		BSTImpl<Integer> tree1 = createTree(treeArray);
+		BSTImpl<Integer> tree2 = createTree(treeArray);
 		BSTImpl<Integer> tree3 = createTree(6, 23, -34, 5, 9, 2, 0, 76, 12, 67, 232, -50);
-		assertTrue(bstManipulation.equals(tree1,tree2));
+
+		assertTrue(bstManipulation.equals(tree1, tree2));
 		assertFalse(bstManipulation.equals(tree1, tree3));
 		assertFalse(bstManipulation.equals(tree2, tree3));
 	}
+
+	@Test
+	public void testIsSimilar(){
+		BSTImpl<Integer> tree1 = createTree(6, 23, -34, 5, 9, 2, 0, 76, 12, 67, 232, -40);
+    BSTImpl<Integer> tree2 = createTree(60, 230, -340, 50, 90, 20, 10, 760, 120, 670, 2320, -400);
+    assertTrue(bstManipulation.isSimilar(tree1, tree2));
+
+		BSTImpl<Integer> tree3 = createTree(6, 23, -34, 5, 9, 2, 0, 76);
+    assertFalse(bstManipulation.isSimilar(tree1, tree3));
+
+		BSTImpl<Integer> tree4 = createTree(23, 6, -34, 5, 9, 2, 0, 76, 12, 67, 232, -50);
+    assertFalse(bstManipulation.isSimilar(tree1, tree4));
+
+		BSTImpl<Integer> empty1 = createTree();
+    BSTImpl<Integer> empty2 = createTree();
+    assertTrue(bstManipulation.isSimilar(empty1, empty2));
+
+    assertFalse(bstManipulation.isSimilar(tree1, empty1));
+	}
+
+	@Test
+	public void testOrderStatistic(){
+		fillTree(); // -40 -34 0 2 5 6 9 12 23 67 76 232
+		assertEquals(Integer.valueOf(-40), bstManipulation.orderStatistic(tree, 1));
+    assertEquals(Integer.valueOf(-34), bstManipulation.orderStatistic(tree, 2));
+    assertEquals(Integer.valueOf(0), bstManipulation.orderStatistic(tree, 3));
+
+		assertEquals(Integer.valueOf(6), bstManipulation.orderStatistic(tree, 6));
+    assertEquals(Integer.valueOf(9), bstManipulation.orderStatistic(tree, 7));
+
+		assertEquals(Integer.valueOf(76), bstManipulation.orderStatistic(tree, 11));
+    assertEquals(Integer.valueOf(232), bstManipulation.orderStatistic(tree, 12)); 
+
+		assertNull(bstManipulation.orderStatistic(tree, 0));
+    assertNull(bstManipulation.orderStatistic(tree, 13));
+	}
+
+	@Test
+public void testFloorCeil() {
+	Integer[] treeArray = { 6, 23, -34, 5, 9, 2, 0, 76, 12, 67, 232, -40 };
+
+	assertEquals(Integer.valueOf(-40), floorCeil.floor(treeArray, -39.5));
+	assertEquals(Integer.valueOf(-34), floorCeil.floor(treeArray, -34.0));
+	assertEquals(Integer.valueOf(0), floorCeil.floor(treeArray, 1.5));
+	assertEquals(Integer.valueOf(9), floorCeil.floor(treeArray, 10));
+	assertEquals(Integer.valueOf(232), floorCeil.floor(treeArray, 300));
+	assertNull(floorCeil.floor(treeArray, -100));                           
+
+	assertEquals(Integer.valueOf(-34), floorCeil.ceil(treeArray, -35));    
+	assertEquals(Integer.valueOf(0), floorCeil.ceil(treeArray, 0));        
+	assertEquals(Integer.valueOf(2), floorCeil.ceil(treeArray, 1.5)); 
+	assertEquals(Integer.valueOf(12), floorCeil.ceil(treeArray, 10));
+	assertEquals(Integer.valueOf(232), floorCeil.ceil(treeArray, 232));    
+	assertNull(floorCeil.ceil(treeArray, 300));
+	}
+
+	@Test
+	public void testPreOrderEmptyTree() {
+		assertArrayEquals(new Integer[] {}, tree.preOrder());
+	}
+
+	@Test
+	public void testInOrderEmptyTree() {
+		assertArrayEquals(new Integer[] {}, tree.order());
+	}
+
+	@Test
+	public void testPostOrderEmptyTree() {
+		assertArrayEquals(new Integer[] {}, tree.postOrder());
+	}
+
+	@Test
+	public void testTraversalsFilledTree() {
+		fillTree(); // -40 -34 0 2 5 6 9 12 23 67 76 232
+
+		Integer[] expectedPreOrder = { 6, -34, -40, 5, 2, 0, 23, 9, 12, 76, 67, 232 };
+		assertArrayEquals(expectedPreOrder, tree.preOrder());
+
+		Integer[] expectedInOrder = { -40, -34, 0, 2, 5, 6, 9, 12, 23, 67, 76, 232 };
+		assertArrayEquals(expectedInOrder, tree.order());
+
+		Integer[] expectedPostOrder = { -40, 0, 2, 5, -34, 12, 9, 67, 232, 76, 23, 6 };
+		assertArrayEquals(expectedPostOrder, tree.postOrder());
+	}
+
 }
