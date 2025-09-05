@@ -11,63 +11,62 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends A
 		this.initiateInternalTable(size);
 	}
 
-	@Override
-	public void insert(T element) {
-		if(isFull()) throw new HashtableOverflowException();
+	private int probeIndex(T element, boolean forInsert) {
+		int probe = 0;
+		int index = -1;
+		boolean done = false;
+		if (element != null) {
+			while (!done && probe < this.table.length) {
+				int hashCode = getHashFunction(element, probe);
 
-		if(element != null){
-			int probe = 0;
-			int hashCode = -1;
-			boolean inserted = false;
-
-			while(!inserted && probe < this.table.length){
-				hashCode = getHashFunction(element, probe);
-				
-				if(table[hashCode] == null || table[hashCode].equals(deletedElement)){
-					table[hashCode] = element;
-					elements++;
-					inserted = true;
-				} else if (table[hashCode].equals(element)){
-					inserted = true;
-				} else {
+				if(table[hashCode] == null) {
+					if (forInsert) {
+						index = hashCode;
+					}
+					done = true;
+				}else if(!table[hashCode].equals(deletedElement) && table[hashCode].equals(element)) {
+					index = hashCode;
+					done = true;
+				}else if(forInsert && table[hashCode].equals(deletedElement)) {
+					index = hashCode;
+					done = true;
+				}else{
 					probe++;
-					this.COLLISIONS++;
+					if (forInsert){
+						this.COLLISIONS++;
+					}
 				}
 			}
+		}
+		return index;
+	}
+
+	@Override
+	public void insert(T element) {
+		if (isFull()) throw new HashtableOverflowException();
+		int index = probeIndex(element, true);
+		if (index != -1 && (table[index] == null || table[index].equals(deletedElement))) {
+			table[index] = element;
+      elements++;
 		}
 	}
 
 	@Override
 	public void remove(T element) {
-		if(element != null && search(element) != null){
-			int probe = 0;
-			int hashCode = -1;
-			boolean removed = false;
-
-			while(!removed && probe < this.table.length){
-				hashCode = getHashFunction(element, probe);
-
-				if(table[hashCode] == null){
-					removed = true;
-				} else if (!table[hashCode].equals(deletedElement) && table[hashCode].equals(element)){
-					table[hashCode] = deletedElement;
-					this.elements--;
-					removed = true;
-				}else{
-					probe++;
-				}
-			}
+		int index = probeIndex(element, false);
+		if(index != -1){
+			table[index] = deletedElement;
+      elements--;
 		}
 	}
-
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public T search(T element) {
-		T answer =  null;
+		T answer = null;
 		int index = indexOf(element);
-		if(index != -1){
-			answer =  (T) table[index];
+		if (index != -1) {
+			answer = (T) table[index];
 		}
 
 		return answer;
@@ -75,30 +74,10 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends A
 
 	@Override
 	public int indexOf(T element) {
-		int index = -1;
-
-		if(element != null){
-			int probe = 0;
-			boolean found = false;
-			int hashCode = -1;
-
-			while(!found && probe < this.table.length){
-				hashCode = getHashFunction(element, probe);
-
-				if(table[hashCode] == null){
-					found = true;
-				} else if (!table[hashCode].equals(deletedElement) && table[hashCode].equals(element)){
-					index = hashCode;
-					found = true;
-				} else{
-					probe++;
-				}
-			}
-		}
-		return index;
+		return probeIndex(element, false);
 	}
 
-	private int getHashFunction(T element, int probe){
+	private int getHashFunction(T element, int probe) {
 		return ((HashFunctionLinearProbing<T>) this.hashFunction).hash(element, probe);
 	}
 }
