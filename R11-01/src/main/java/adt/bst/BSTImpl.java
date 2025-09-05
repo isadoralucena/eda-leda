@@ -31,12 +31,6 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 		
 		if(node.isEmpty()){
 			height = -1;
-		}else if(node.isLeaf()){
-			height = 0;
-		}else if(!node.getRight().isEmpty() && node.getLeft().isEmpty()){
-			height = 1 + height((BSTNode<T>) node.getRight());
-		}else if(!node.getLeft().isEmpty() && node.getRight().isEmpty()){
-			height = 1 + height((BSTNode<T>) node.getLeft());
 		}else{
 			height = 1 + Math.max(height((BSTNode<T>) node.getLeft()), height((BSTNode<T>) node.getRight()));
 		}
