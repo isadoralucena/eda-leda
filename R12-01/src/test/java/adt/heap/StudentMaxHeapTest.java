@@ -11,17 +11,23 @@ import java.util.Comparator;
 import org.junit.Before;
 import org.junit.Test;
 
+import adt.heap.extended.FloorCeilHeap;
+import adt.heap.extended.FloorCeilHeapImpl;
+import orderStatistic.OrderStatistics;
+import orderStatistic.OrderStatisticsHeapImpl;
+
 public class StudentMaxHeapTest {
 
 	Heap<Integer> heap;
+	OrderStatistics<Integer> orderStatistics;
+	FloorCeilHeap floorCeilHeap;
 
 	@Before
 	public void setUp() {
-		// TODO Instancie seu comparator para fazer sua estrutura funcionar como
-		// uma max heap aqui. Use instanciacao anonima da interface
-		// Comparator!!!!
-		Comparator<Integer> comparator = null;
+		Comparator<Integer> comparator = (o1, o2) -> o2.compareTo(o1);
 		heap = new HeapImpl<Integer>(comparator);
+		orderStatistics = new OrderStatisticsHeapImpl<>();
+		floorCeilHeap = new FloorCeilHeapImpl(comparator);
 	}
 
 	@Test
@@ -31,7 +37,7 @@ public class StudentMaxHeapTest {
 		assertEquals(8, heap.size());
 		assertFalse(heap.isEmpty());
 
-		//verifyHeap(new Integer[] { 99, 12, 82, 6, 34, 64, 58, 1 });
+		verifyHeap(new Integer[] { 99, 12, 82, 6, 34, 64, 58, 1 });
 		verifyHeap(new Integer[] { 99, 34, 82, 6, 12, 64, 58, 1 });
 	}
 
@@ -80,6 +86,38 @@ public class StudentMaxHeapTest {
 	}
 
 	@Test
+	public void testEmptyHeap() {
+		assertTrue(heap.isEmpty());
+		assertEquals(0, heap.size());
+		assertEquals(null, heap.rootElement());
+		assertEquals(null, heap.extractRootElement());
+	}
+
+	@Test
+	public void testInsertDuplicates() {
+		heap.insert(10);
+		heap.insert(10);
+		heap.insert(10);
+
+		assertEquals(3, heap.size());
+		verifyHeap(new Integer[] { 10, 10, 10 });
+	}
+
+	@Test
+	public void testExtractAll() {
+		heap.insert(5);
+		heap.insert(15);
+		heap.insert(10);
+
+		Integer[] extracted = new Integer[3];
+		for (int i = 0; i < 3; i++) {
+			extracted[i] = heap.extractRootElement();
+		}
+
+		assertArrayEquals(new Integer[] { 15, 10, 5 }, extracted);
+	}
+
+	@Test
 	public void testSort() {
 		assertArrayEquals(new Integer[] { 5, 6, 12, 20, 34, 43, 49, 92 },
 				heap.heapsort(new Integer[] { 34, 92, 5, 12, 49, 20, 43, 6 }));
@@ -113,4 +151,84 @@ public class StudentMaxHeapTest {
 		assertTrue(isHeap);
 	}
 
+	@Test
+	public void testHeapsortEmptyArray() {
+		assertArrayEquals(new Integer[] {}, heap.heapsort(new Integer[] {}));
+	}
+
+	@Test
+	public void testHeapsortSingleElement() {
+		assertArrayEquals(new Integer[] { 42 }, heap.heapsort(new Integer[] { 42 }));
+	}
+
+	@Test
+	public void testHeapifyAfterMultipleInserts() {
+		Integer[] values = { 3, 1, 6, 5, 2, 4 };
+		for (int v : values)
+			heap.insert(v);
+
+		Integer[] sortedDesc = { 6, 5, 4, 3, 2, 1 };
+		Integer[] extracted = new Integer[6];
+		for (int i = 0; i < 6; i++) {
+			extracted[i] = heap.extractRootElement();
+		}
+
+		assertArrayEquals(sortedDesc, extracted);
+		assertTrue(heap.isEmpty());
+	}
+
+	@Test
+	public void testOrderStatistics() {
+		Integer[] values = { 7, 3, 5, 1, 9 };
+
+		assertEquals(Integer.valueOf(1), orderStatistics.getOrderStatistics(values, 1));
+		assertEquals(Integer.valueOf(3), orderStatistics.getOrderStatistics(values, 2));
+		assertEquals(Integer.valueOf(5), orderStatistics.getOrderStatistics(values, 3));
+		assertEquals(Integer.valueOf(7), orderStatistics.getOrderStatistics(values, 4));
+		assertEquals(Integer.valueOf(9), orderStatistics.getOrderStatistics(values, 5));
+	}
+
+	@Test
+	public void testFloorWithMultipleCandidates() {
+		Integer[] array = { 4, 12, 7, 15, 9 };
+		double number = 13;
+		Integer expectedFloor = 12;
+
+		Integer actualFloor = floorCeilHeap.floor(array, number);
+
+		assertEquals(expectedFloor, actualFloor);
+	}
+
+	@Test
+	public void testCeilWithMultipleCandidates() {
+		Integer[] array = { 4, 12, 7, 15, 9 };
+		double number = 8;
+		Integer expectedCeil = 9;
+
+		Integer actualCeil = floorCeilHeap.ceil(array, number);
+
+		assertEquals(expectedCeil, actualCeil);
+	}
+
+	@Test
+	public void testFloorNoCandidates() {
+		Integer[] array = { 10, 20, 30 };
+		double number = 5;
+		Integer expectedFloor = null;
+
+		Integer actualFloor = floorCeilHeap.floor(array, number);
+
+		assertEquals(expectedFloor, actualFloor);
+	}
+
+	@Test
+	public void testCeilNoCandidates() {
+		Integer[] array = { 1, 2, 3 };
+		double number = 10;
+		Integer expectedCeil = null;
+
+		Integer actualCeil = floorCeilHeap.ceil(array, number);
+
+		assertEquals(expectedCeil, actualCeil);
+	}
 }

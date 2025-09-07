@@ -5,7 +5,7 @@ import adt.heap.Heap;
 /**
  * Heap para calcular floor e ceil de um numero em um conjunto de dados 
  * (podendo o numero estar ou nao no conjunto de dados).
- * Os metodos devem funcionar corretamente independnete do tipo da heap (max ou min)
+ * Os metodos devem funcionar corretamente independente do tipo da heap (max ou min)
  * Voce pode assumir apenas o uso de ComparatorMaxHeap e ComparatorMinHeap.
  * 
  * @author Adalberto
