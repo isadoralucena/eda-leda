@@ -33,11 +33,10 @@ public interface AVLCountAndFill<T extends Comparable<T>> extends AVLTree<T> {
 	/**
 	 * It fills this AVL tree with the elements from the array argument, while
 	 * avoiding any rotation operation. Any existing elements must be kept in
-	 * the tree. You must use only the <b><em>insert</em></b> method to add new
+	 * the tree. You must use only the insert method to add new
 	 * elements to the tree.
 	 * 
-	 * @param array
-	 *            the array containing the data to be inserted in this tree.
+	 * @param array the array containing the data to be inserted in this tree.
 	 */
 	public void fillWithoutRebalance(T[] array);
 }

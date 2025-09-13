@@ -1,6 +1,8 @@
 package adt.avltree;
 
+import adt.bst.BSTNode;
 import adt.bst.BSTVerifierImpl;
+import adt.bt.Util;
 
 /**
  * Performs consistency validations within a AVL Tree instance
@@ -19,16 +21,25 @@ public class AVLTreeVerifierImpl<T extends Comparable<T>> extends BSTVerifierImp
 	}
 
 	private AVLTreeImpl<T> getAVLTree() {
-		return avlTree;
+		return this.avlTree;
 	}
 
 	@Override
 	public boolean isAVLTree() {
-
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
-
-		// return isBST() && ...
+		return this.isBST() && this.isAVLTree(this.getAVLTree().getRoot());
 	}
 
+	private boolean isAVLTree(BSTNode<T> node) {
+		boolean answer = true;
+
+		if (node != null && !node.isEmpty()) {
+			int balance = Math.abs(this.avlTree.calculateBalance(node));
+      answer = balance <= 1;
+			if (answer) {
+            answer = isAVLTree((BSTNode<T>) node.getLeft()) && 
+                     isAVLTree((BSTNode<T>) node.getRight());
+      }
+		}
+		return answer;
+	}
 }

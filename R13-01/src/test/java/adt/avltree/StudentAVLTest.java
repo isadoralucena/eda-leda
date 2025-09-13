@@ -69,4 +69,64 @@ public class StudentAVLTest {
 		assertEquals(NIL, avl.getRoot());
 		assertTrue(avl.isEmpty());
 	}
+
+	@Test
+	public void testRotationsAndBalance() {
+		avl.insert(30);
+		avl.insert(20);
+		avl.insert(10);
+		assertArrayEquals(new Integer[]{20, 10, 30}, avl.preOrder());
+
+		avl = new AVLTreeImpl<>();
+		avl.insert(10);
+		avl.insert(20);
+		avl.insert(30);
+		assertArrayEquals(new Integer[]{20, 10, 30}, avl.preOrder());
+
+		avl = new AVLTreeImpl<>();
+		avl.insert(30);
+		avl.insert(10);
+		avl.insert(20);
+		assertArrayEquals(new Integer[]{20, 10, 30}, avl.preOrder());
+
+		avl = new AVLTreeImpl<>();
+		avl.insert(10);
+		avl.insert(30);
+		avl.insert(20);
+		assertArrayEquals(new Integer[]{20, 10, 30}, avl.preOrder());
+	}
+
+	@Test
+	public void testHeightAndSize() {
+		assertEquals(-1, avl.height());
+		assertEquals(0, avl.size());
+
+		avl.insert(15);
+		assertEquals(0, avl.height());
+		assertEquals(1, avl.size());
+
+		avl.insert(10);
+		avl.insert(20);
+		assertEquals(1, avl.height());
+		assertEquals(3, avl.size());
+
+		avl.remove(15);
+		assertEquals(1, avl.height());
+		assertEquals(2, avl.size());
+	}
+
+	@Test
+	public void testPreAndPostOrder() {
+		avl.insert(10);
+		avl.insert(5);
+		avl.insert(15);
+		avl.insert(3);
+		avl.insert(7);
+
+		Integer[] preOrderExpected = {10, 5, 3, 7, 15};
+		Integer[] postOrderExpected = {3, 7, 5, 15, 10};
+
+		assertArrayEquals(preOrderExpected, avl.preOrder());
+		assertArrayEquals(postOrderExpected, avl.postOrder());
+	}
 }

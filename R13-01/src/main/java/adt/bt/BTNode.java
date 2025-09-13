@@ -30,26 +30,26 @@ public class BTNode<T> {
 	
 	@Override
 	public String toString() {
-		String resp = "NIL";
+		String answer = "NIL";
 		if (!isEmpty()) {
-			resp = data.toString();
+			answer = data.toString();
 		}
-		return resp;
+		return answer;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object obj) {
-		boolean resp = false;
+		boolean answer = false;
 		if (obj instanceof BTNode) {
 			if (!this.isEmpty() && !((BTNode<T>) obj).isEmpty()) {
-				resp = this.data.equals(((BTNode<T>) obj).data);
+				answer = this.data.equals(((BTNode<T>) obj).data);
 			} else {
-				resp = this.isEmpty() && ((BTNode<T>) obj).isEmpty();
+				answer = this.isEmpty() && ((BTNode<T>) obj).isEmpty();
 			}
 
 		}
-		return resp;
+		return answer;
 	}
 
 	public T getData() {
