@@ -169,6 +169,8 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 		if(element != null && !elementNode.isEmpty()){
 			if(elementNode.isLeaf()){
 				elementNode.setData(null);
+				elementNode.setLeft(null);
+				elementNode.setRight(null);
 			}else if((!elementNode.getLeft().isEmpty() && elementNode.getRight().isEmpty()) || (elementNode.getLeft().isEmpty() && !elementNode.getRight().isEmpty())){
 				if(!elementNode.equals(this.root)){
 					if(elementNode.getParent().getLeft().equals(elementNode)){

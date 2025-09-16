@@ -66,6 +66,8 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements 
 		if (element != null && !elementNode.isEmpty()) {
 			if (elementNode.isLeaf()) {
 				elementNode.setData(null);
+				elementNode.setLeft(null);
+				elementNode.setRight(null);
 				this.rebalanceUp(elementNode);
 			} else if ((!elementNode.getLeft().isEmpty() && elementNode.getRight().isEmpty())
 					|| (elementNode.getLeft().isEmpty() && !elementNode.getRight().isEmpty())) {
@@ -113,7 +115,6 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements 
 		return answer;
 	}
 
-
 	/**
 	 * Rebalances the given node if it violates AVL balance rules.
 	 *
@@ -134,7 +135,7 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements 
 		if (node != null && !node.isEmpty()) {
 			int balance = calculateBalance(node);
 			BSTNode<T> left = (BSTNode<T>) node.getLeft();
-    	BSTNode<T> right = (BSTNode<T>) node.getRight();
+			BSTNode<T> right = (BSTNode<T>) node.getRight();
 			BSTNode<T> newRoot = null;
 
 			if (balance > 1) {
