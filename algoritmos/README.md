@@ -3,6 +3,7 @@
 Esta pasta contém **exercícios pessoais** desenvolvidos fora dos roteiros avaliativos da disciplina de EDA/LEDA — UFCG, 2025.1.  
 
 Os problemas aqui incluem implementações clássicas de algoritmos e estruturas de dados, muitas vezes encontrados em **LeetCode, entrevistas técnicas e provas anteriores**.  
+
 Esses exercícios **não foram avaliados por corretores**: foram feitos apenas para prática pessoal.
 
 ---
