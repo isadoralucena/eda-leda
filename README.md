@@ -1,5 +1,5 @@
 # eda-leda
-Repositório dedicado ao armazenamento dos meus algoritmos desenvolvidos durante as disciplinas de **Estrutura de Dados e Algoritmos** e **Laboratório de Estrutura de Dados e Algoritmoss** — UFCG, 2025.1.
+Repositório dedicado ao armazenamento dos meus algoritmos desenvolvidos durante as disciplinas de **Estrutura de Dados e Algoritmos** e **Laboratório de Estrutura de Dados e Algoritmos** — UFCG, 2025.1.
 
 ## Organização do repositório
 
@@ -71,7 +71,7 @@ Dentro da pasta [`algoritmos/`](./algoritmos) estão exercícios extras feitos p
 | [consecutive-parent-child-bst](./algoritmos/consecutive-parent-child-bst) | Verifica se pai e filho em uma BST têm valores consecutivos |
 | [cousins-binary-search-tree](./algoritmos/cousins-binary-search-tree) | Identificação de nós primos de primeiro e segundo grau em árvore binária |
 | [euclidean-algorithm](./algoritmos/euclidean-algorithm) | Cálculo do MDC (máximo divisor comum) com o algoritmo de Euclides |
-| [fibonacci (e variações)](./algoritmos/fibbonacci) | Cálculo da sequência de Fibonacci em versões recursiva, iterativa, por matriz entre outras |e
+| [fibonacci (e variações)](./algoritmos/fibonacci) | Cálculo da sequência de Fibonacci em versões recursiva, iterativa, por matriz entre outras |e
 | [queue-with-two-stacks](./algoritmos/queue-with-two-stacks) | Fila implementada com duas pilhas |
 | [radix-sort](./algoritmos/radix-sort) | Algoritmo de ordenação por dígitos (baseado em Counting Sort) |
 | [search-rotated-array](./algoritmos/search-rotated-array) | Busca em array ordenado que foi rotacionado |

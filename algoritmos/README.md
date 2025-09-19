@@ -19,7 +19,7 @@ Esses exercícios **não foram avaliados por corretores**: foram feitos apenas p
 | [consecutive-parent-child-bst](./consecutive-parent-child-bst) | Verifica se pai e filho em uma BST têm valores consecutivos |
 | [cousins-binary-search-tree](./cousins-binary-search-tree) | Identificação de nós primos de primeiro e segundo grau em árvore binária |
 | [euclidean-algorithm](./euclidean-algorithm) | Cálculo do MDC (máximo divisor comum) com o algoritmo de Euclides |
-| [fibonacci (e variações)](./fibbonacci) | Cálculo da sequência de Fibonacci em versões recursiva, iterativa, por matriz entre outras |e
+| [fibonacci (e variações)](./fibonacci) | Cálculo da sequência de Fibonacci em versões recursiva, iterativa, por matriz entre outras |e
 | [queue-with-two-stacks](./queue-with-two-stacks) | Fila implementada com duas pilhas |
 | [radix-sort](./radix-sort) | Algoritmo de ordenação por dígitos (baseado em Counting Sort) |
 | [search-rotated-array](./search-rotated-array) | Busca em array ordenado que foi rotacionado |
