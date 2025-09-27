@@ -11,60 +11,64 @@ import adt.bst.BSTNode;
 public class FloorCeilBSTImpl extends BSTImpl<Integer> implements FloorCeilBST {
 
 	@Override
-	public Integer floor(Integer[] array, double numero) {
-		BSTImpl<Integer> tree = this.createTree(array);
-		return floor(tree.getRoot(), numero);
+	public Integer floor(Integer[] array, double number) {
+		this.root = new BSTNode<>();
+		Integer floor = null;
+
+		if (array != null && array.length > 0) {
+			floor = floor(array, 0, number, null);
+		}
+
+		return floor;
+
 	}
 
-	private Integer floor(BSTNode<Integer> node, double numero) {
-		Integer answer = null;
-		if(!node.isEmpty()){
-			if(node.getData().doubleValue() == numero){
-				answer = node.getData();
-			}else if (node.getData() > numero){
-				answer = floor((BSTNode<Integer>) node.getLeft(), numero);
-			}else{
-				Integer rightFloor = floor((BSTNode<Integer>) node.getRight(), numero);
-        if (rightFloor != null) {
-          answer = rightFloor;
-        } else {
-          answer = node.getData();
-        }
+	private Integer floor(Integer[] arr, int index, double target, Integer currentFloor) {
+		Integer floorCandidate = currentFloor;
+
+		if (index < arr.length) {
+			Integer currentValue = arr[index];
+			if (currentValue != null) {
+				this.insert(currentValue);
+
+				if (currentValue <= target && (floorCandidate == null || currentValue > floorCandidate)) {
+					floorCandidate = currentValue;
+				}
 			}
+
+			floorCandidate = floor(arr, index + 1, target, floorCandidate);
 		}
-		return answer;
+
+		return floorCandidate;
 	}
 
 	@Override
-	public Integer ceil(Integer[] array, double numero) {
-		BSTImpl<Integer> tree = this.createTree(array);
-		return ceil(tree.getRoot(), numero);
+	public Integer ceil(Integer[] array, double number) {
+		this.root = new BSTNode<>();
+		Integer ceil = null;
+
+		if (array != null && array.length > 0) {
+			ceil = ceil(array, 0, number, null);
+		}
+
+		return ceil;
 	}
 
-	private Integer ceil(BSTNode<Integer> node, double numero) {
-		Integer answer = null;
-		if(!node.isEmpty()){
-			if(node.getData().doubleValue() == numero){
-				answer = node.getData();
-			}else if (node.getData() < numero){
-				answer = ceil((BSTNode<Integer>) node.getRight(), numero);
-			}else{
-				Integer leftCeil = ceil((BSTNode<Integer>) node.getLeft(), numero);
-        if (leftCeil != null) {
-          answer = leftCeil;
-        } else {
-          answer = node.getData();
-        }
+	private Integer ceil(Integer[] arr, int index, double target, Integer currentCeil) {
+		Integer ceilCandidate = currentCeil;
+
+		if (index < arr.length) {
+			Integer currentValue = arr[index];
+
+			if (currentValue != null) {
+				this.insert(currentValue);
+
+				if (currentValue >= target && (ceilCandidate == null || currentValue < ceilCandidate)) {
+					ceilCandidate = currentValue;
+				}
 			}
+			ceilCandidate = ceil(arr, index + 1, target, ceilCandidate);
 		}
-		return answer;
-	}
-
-	private BSTImpl<Integer> createTree(Integer[] array){
-		BSTImpl<Integer> tree = new BSTImpl<>();
-		for (int i : array) {
-			tree.insert(i);
-		}
-		return tree;
+		return ceilCandidate;
 	}
 }

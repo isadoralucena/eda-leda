@@ -1,7 +1,5 @@
 package adt.bst;
 
-import java.util.ArrayList;
-
 public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
 	protected BSTNode<T> root;
@@ -208,52 +206,49 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
 	@Override
 	public T[] preOrder() {
-		ArrayList<T> list = new ArrayList<>();
-		preOrder(this.root, list);
-		T[] array = (T[]) new Comparable[list.size()];
-		return list.toArray(array);
+		T[] array = (T[]) new Comparable[size()];
+		preOrder(this.root, array, new int[]{0});
+		return array;
 	}
 
-	private void preOrder(BSTNode<T> node, ArrayList<T> preOrder) {
-		if (!node.isEmpty()) {
-			preOrder.add(node.getData());
-			preOrder((BSTNode<T>) node.getLeft(), preOrder);
-			preOrder((BSTNode<T>) node.getRight(), preOrder);
+	private void preOrder(BSTNode<T> node, T[] array, int[] index){
+		if(!node.isEmpty()){
+			array[index[0]++] = node.getData();
+			preOrder((BSTNode<T>) node.getLeft(), array, index);
+			preOrder((BSTNode<T>) node.getRight(), array, index);
 		}
 	}
 
 	@Override
 	public T[] order() {
-		ArrayList<T> list = new ArrayList<>();
-		order(this.root, list);
-		T[] array = (T[]) new Comparable[list.size()];
-		return list.toArray(array);
+		T[] array = (T[]) new Comparable[size()];
+		order(this.root, array, new int[]{0});
+		return array;
 	}
 
-	private void order(BSTNode<T> node, ArrayList<T> order) {
-		if (!node.isEmpty()) {
-			order((BSTNode<T>) node.getLeft(), order);
-			order.add(node.getData());
-			order((BSTNode<T>) node.getRight(), order);
+	private void order(BSTNode<T> node, T[] array, int[] index){
+		if(!node.isEmpty()){
+			order((BSTNode<T>) node.getLeft(), array, index);
+			array[index[0]++] = node.getData();
+			order((BSTNode<T>) node.getRight(), array, index);
 		}
 	}
 
 	@Override
 	public T[] postOrder() {
-		ArrayList<T> list = new ArrayList<>();
-		postOrder(this.root, list);
-		T[] array = (T[]) new Comparable[list.size()];
-		return list.toArray(array);
+		T[] array = (T[]) new Comparable[size()];
+		postOrder(this.root, array, new int[]{0});
+		return array;
 	}
 
-	private void postOrder(BSTNode<T> node, ArrayList<T> postOrder) {
-		if (!node.isEmpty()) {
-			postOrder((BSTNode<T>) node.getLeft(), postOrder);
-			postOrder((BSTNode<T>) node.getRight(), postOrder);
-			postOrder.add(node.getData());
+	private void postOrder(BSTNode<T> node, T[] array, int[] index){
+		if(!node.isEmpty()){
+			postOrder((BSTNode<T>) node.getLeft(), array, index);
+			postOrder((BSTNode<T>) node.getRight(), array, index);
+			array[index[0]++] = node.getData();
 		}
 	}
-
+	
 	/**
 	 * This method is already implemented using recursion. You must understand
 	 * how it work and use similar idea with the other methods.

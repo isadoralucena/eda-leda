@@ -1,10 +1,8 @@
 package adt.bst;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * - Esta eh a unica classe que pode ser modificada 
+ * Esta é a unica classe que pode ser modificada
+ * 
  * @author adalbertocajueiro
  *
  * @param <T>
@@ -16,14 +14,14 @@ public class SimpleBSTManipulationImpl<T extends Comparable<T>> implements Simpl
 		return this.equals((BSTNode<T>) tree1.getRoot(), (BSTNode<T>) tree2.getRoot());
 	}
 
-	private boolean equals(BSTNode<T> node1, BSTNode<T> node2){
+	private boolean equals(BSTNode<T> node1, BSTNode<T> node2) {
 		boolean answer = false;
-		if(node1.isEmpty() || node2.isEmpty()){
+		if (node1.isEmpty() || node2.isEmpty()) {
 			answer = node1.isEmpty() && node2.isEmpty();
-		}else{
-			answer = node1.getData().equals(node2.getData()) 
-								&& this.equals((BSTNode<T>) node1.getLeft(), (BSTNode<T>) node2.getLeft())
-								&& this.equals((BSTNode<T>) node1.getRight(), (BSTNode<T>) node2.getRight());
+		} else {
+			answer = node1.getData().equals(node2.getData())
+					&& this.equals((BSTNode<T>) node1.getLeft(), (BSTNode<T>) node2.getLeft())
+					&& this.equals((BSTNode<T>) node1.getRight(), (BSTNode<T>) node2.getRight());
 		}
 		return answer;
 	}
@@ -33,58 +31,42 @@ public class SimpleBSTManipulationImpl<T extends Comparable<T>> implements Simpl
 		return this.isSimilar((BSTNode<T>) tree1.getRoot(), (BSTNode<T>) tree2.getRoot());
 	}
 
-	private boolean isSimilar(BSTNode<T> node1, BSTNode<T> node2){
+	private boolean isSimilar(BSTNode<T> node1, BSTNode<T> node2) {
 		boolean answer = false;
-		if(node1.isEmpty() || node2.isEmpty()){
+		if (node1.isEmpty() || node2.isEmpty()) {
 			answer = node1.isEmpty() && node2.isEmpty();
-		}else{
+		} else {
 			answer = !node1.isEmpty() && !node2.isEmpty()
-									&& this.isSimilar((BSTNode<T>) node1.getLeft(), (BSTNode<T>) node2.getLeft())
-									&& this.isSimilar((BSTNode<T>) node1.getRight(), (BSTNode<T>) node2.getRight());
+					&& this.isSimilar((BSTNode<T>) node1.getLeft(), (BSTNode<T>) node2.getLeft())
+					&& this.isSimilar((BSTNode<T>) node1.getRight(), (BSTNode<T>) node2.getRight());
 		}
 		return answer;
 	}
 
 	@Override
 	public T orderStatistic(BST<T> tree, int k) {
-		T answer = null;
-		if (k >= 1) {
-			Map<BSTNode<T>,Integer> subtreeSizes = new HashMap<>();
-    	computeSubtreeSizes((BSTNode<T>) tree.getRoot(), subtreeSizes);
-			answer = this.orderStatistic((BSTNode<T>) tree.getRoot(), k, subtreeSizes);
+		T result = null;
+		if (tree != null && k > 0 && k <= tree.size()) {
+			int[] count = { 0 };
+			result = inOrderFind((BSTNode<T>) tree.getRoot(), k, count);
 		}
-		return answer;
+		return result;
 	}
 
-	private T orderStatistic(BSTNode<T> node, int k, Map<BSTNode<T>,Integer> sizes){
-		T answer = null;
+	private T inOrderFind(BSTNode<T> node, int k, int[] count) {
+		T result = null;
+		if (node != null && !node.isEmpty()) {
+			result = inOrderFind((BSTNode<T>) node.getLeft(), k, count);
 
-		if(!node.isEmpty()){
-			int sizeLeft = sizes.getOrDefault(node.getLeft(), 0);
-			if (k == sizeLeft + 1) {
-        answer = node.getData();
-			} else if (k <= sizeLeft) {
-				answer = orderStatistic((BSTNode<T>) node.getLeft(), k, sizes);
-			} else {
-				answer = orderStatistic((BSTNode<T>) node.getRight(), k - (sizeLeft+1), sizes);
+			if (result == null) {
+				count[0]++;
+				if (count[0] == k) {
+					result = node.getData();
+				} else {
+					result = inOrderFind((BSTNode<T>) node.getRight(), k, count);
+				}
 			}
 		}
-		return answer;
-	}
-
-	/*
-	 * Computes and stores the size of each subtree rooted at the given node
-	 * The size of a subtree is the number of non-empty nodes it contains
-	 * This helps improve the efficiency of accessing subtree sizes later
-	 */
-	private int computeSubtreeSizes(BSTNode<T> node, Map<BSTNode<T>,Integer> sizes) {
-		int totalSize = 0;
-    if (node != null && !node.isEmpty()) {
-			int leftSize = computeSubtreeSizes((BSTNode<T>) node.getLeft(), sizes);
-			int rightSize = computeSubtreeSizes((BSTNode<T>) node.getRight(), sizes);
-			totalSize = 1 + leftSize + rightSize;
-			sizes.put(node, totalSize);
-		}
-		return totalSize;
+		return result;
 	}
 }
