@@ -53,7 +53,7 @@ Repositório dedicado ao armazenamento dos meus algoritmos desenvolvidos durante
 | Roteiro  | [R11-01](./R11-01) | Árvore binária de busca (BST) |
 | Roteiro  | [R12-01](./R12-01) | Heap binária |
 | Roteiro  | [R13-01](./R13-01) | Árvore AVL |
-| Prova    | [PP3-01](./PP3-01) | BST CountInRange + LISInRange (percursos em BST) |
+| Prova    | [PP3-01](./PP3-01) | BST CountInRange + ListInRange (percursos em BST) |
 
 ---
 
