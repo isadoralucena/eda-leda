@@ -13,7 +13,7 @@ Repositório dedicado ao armazenamento dos meus algoritmos desenvolvidos durante
 - Subpastas de `algoritmos/` são exercícios pessoais (ex.: do LeetCode, comum em entrevistas, provas anteriores), não vinculados aos roteiros obrigatórios da disciplina.  
 
 
-> Todos os roteiros avaliativos e provas foram corrigidos após feedback dos corretores (notas de design e notas dos testes).
+> Todos os roteiros avaliativos e provas foram corrigidos por mim com base no feedback dos corretores do período em que cursei a disciplina, incluindo notas de design e as notas dos testes disponíveis na época. Os critérios de avaliação e os casos abordados pelos testes podem variar ao longo dos anos.
 
 ---
 
